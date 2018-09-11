@@ -1,0 +1,132 @@
+Expense Reimbursement System (ERS)
+
+//if u want, u can make 1 super manager add/remove employees/managers
+-An Employee can login
+	//servlet called StaffLoginServlet
+-An Employee can view the Employee Homepage
+	//servlet like directory servlet, but EmployeeDirectoryServlet
+-An Employee can logout
+-An Employee can submit a reimbursement request
+	create()
+-An Employee can view their pending reimbursement requests
+	in ReimbursementDao
+	//list listStaffMemberPendingReimbursements(staffId)   //can 
+										//return a list of 
+										//reimbursements
+	list<reimb> listReimbursements(String sql)
+		sql = select * from RRequest where e_id = input employee
+		save that table somehow? :/
+-An Employee can view their resolved reimbursement requests
+			//similar
+	in ReimbursementDao
+	//list listStaffMemberResolvedReimbursements(staffId);
+	list<reimb> listReimbursements(String sql)
+-An Employee can view their information // profile
+	in StaffDao
+	Staff getStaffByUserName(username)
+
+-An Employee can update their information 
+	in StaffDao
+	int updateStaffProfile(Staff)
+
+-A Manager can login
+-A Manager can view the Manager Homepage
+	Oooh, can have both links Employee or Manager HOmepage :D
+	if(status = manager) -> go to ManagerHomepage, where they have
+	their own menu of operations
+-A Manager can logout
+-A Manager can approve/deny pending reimbursement requests
+	//in ReimbursementDao, make 2 functions
+	Reimbursement getRequestById(requestId); //grab Reimb object
+	//update Reimb,setStatus( wat they want );
+	int updateRequest(Reimbursement); //do update 
+	
+-A Manager can view all pending requests from all employees
+	//List<Reimb> listAllPendingRequests()  //use Statement 
+	list<reimb> listReimbursements(String sql)
+		//sql =select rr_id, e_id, m_id from RRequest where status = 
+		//pending
+-A Manager can view all resolved requests from all employees and see which manager resolved it
+	//List<Reimb> listAllResolvedRequests()
+	list<reimb> listReimbursements(String sql)
+	//sql = select RR_id, M_ID from RRequest where status = resolved
+
+	//use the already created getRequestById(i)
+	//.getManager_ID()
+-A Manager can view all Employees
+	in StaffDao
+	listStaffMembers	
+		//select * from employee's profile table
+-A Manager can view reimbursement requests from a single Employee
+	in ReimbursementDao
+	listReimbursements(String sql)   //here wanna use PreparedStatem
+	//sql = select * from RRequest where e_id = employee
+
+Questions to ask: 
+	What information do employees have in profiles?? watever
+	What does employee homepage show?? same as profile??
+		no. just general homepage, with helpful, relevant links
+	Not sure how the managers related to th employee
+	Are some employees going to be managers?
+	WHen manager views all employees, they see themselves then too?? 	yes or no cuz if no, u can say manag can see only all 
+		employees that
+		answer to them :)
+
+Database Brainstorm:
+	S RRequest Table: 
+		{PK:reimb.req. ID | FK:staff's S_ID | request status| 
+			FK:StaffManager S_ID(manager that handled reimburse)}
+
+	Staff Profile Table: 
+		{PK:S_ID | Name | userN | pWord | FK:Manager's M_ID(manager
+			answers to) | email | phone | status=emp/both/manager}
+									//Let's add "both" later tho
+									//for now example only has
+									1   3    employee
+									2   null manager
+									3   null manager
+									4   2    employee
+										no
+									5   2    both
+									6   5    employee
+			1   3, 4
+			2   5, 6
+			3   7, 8, 9
+			4   10, 11, 12
+			5   13, 14
+			6   15
+
+		//Manager: 
+			//{M_ID | Name | }
+
+
+
+
+------------------------------------------------------------------
+-An Employee can upload an image of his/her receipt as part of the reimbursement request (optional)
+-A Manager can view images of the receipts from reimbursement requests(optional)
+-An Employee receives an email when one of their reimbursement requests is resolved (optional)
+-A Manager can register an Employee, which sends the Employee an email with their username and temp password (optional)
+-An Employee can reset their password (Optional - tied with above functional requirement)
+
+Technologies:
+-Java 1.8
+-Servlets
+-JDBC
+-PL/SQL
+-HTML
+-CSS
+-Javascript
+-Bootstrap
+-AJAX
+-JUnit
+-log4j (optional)
+
+Environment:
+-Tomcat Server
+-Oracle 11g Database
+-Eclipse/Spring Tools Suite
+-SQL Developer
+
+
+

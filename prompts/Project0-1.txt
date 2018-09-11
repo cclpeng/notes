@@ -1,0 +1,17 @@
+Create a console application that will function as a mock bank using solely Java 1.8. Persist your data in a text file (username, password, account balance, etc.). 
+					write functionality to serialize your bank after every transaction? optional
+
+As a user, I can:
+	* create an account with a unique email or username, along with a password (for this first iteration, multiple users need not be accommodated) 
+	* log in 
+	* log out
+	* deposit money
+	* withdraw money
+	* view balance
+
+To note: There are no strict requirements regarding the flow of operation for your program, but keep the user in mind. Is your menu clear? Is user input validated? Do I have to log back in after each transaction? All important things to consider.
+
+
+Due date: 20 Aug 2018 by 9:00 am and will be reviewed during one on one’s
+
+Print menu to console
