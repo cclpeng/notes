@@ -1,0 +1,24 @@
+Week 1 questions to study
+
+What does super() in java do?
+	used to call constructor of parent class
+		eg. 
+			Parent(int var, String s) <---parent const is 
+						....	
+			Child(int var, String s, int i) { <---child is
+			  	super(var, s); 	<--super() fills inherited var for us
+			  	this.i = i;
+			}
+	can invoke in a method to be overridden to call parent method
+		eg.
+			Dog class
+ 				say() { print "I'm a dog"}
+			Beagle class extends Dog
+				@Override
+				say() { 
+					super.say();		//"I'm a dog"
+					print " ... but more specifically a beagle!!"}
+	super() on its own is just good practice to put in a default cons
+		so you're reminded that this constructor doesnt set the var
+
+What's the difference between || and |    plus   && and &?

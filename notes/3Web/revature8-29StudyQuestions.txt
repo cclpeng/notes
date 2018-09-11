@@ -1,0 +1,19 @@
+interpreted vs compiled list?
+
+== vs ===?
+why use ===, when is it preferred?
+what are falsy/truthy?
+falsy types?
+js types?
+what's type of a function?
+what's NaN?
+Type of NaN?
+how to denote object notation?
+what's ; injection?
+ways to declare a variable?
+list scopes
+scopes allowed by var, let, const?
+variable hoisting waht is? which way to declare variable has
+    var hoisting?
+Example of var hoising?
+Inheritance in JS? Prototyping?

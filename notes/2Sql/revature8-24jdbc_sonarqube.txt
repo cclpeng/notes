@@ -1,0 +1,104 @@
+JDBC - Java Data Base Connectivity
+
+another dependency we will use in conjunction with maven
+
+major interfaces
+	connection interface. object that helps us manage connection to 
+		db. can use to create statements which run sql in db
+		Get connection from our Driver Manager (provided with our db
+			credentials)
+		By default, connection is set to auto commit = true
+	Statement. 
+		singleton design pattern helps us keep our connection signed 
+		in for a while. so we dont have to connect to do every 
+		statement
+		con = connection
+		statement s = con.createStatement("SELECT * From emPLOYEE";)
+			generally wanna avoid using statements cuz they're 
+			vulnerable to sql injection
+			"select password
+			 from users
+			 where username = " + input
+				login page
+				username: carolyn
+				password: drop table users
+				 ===> very bad cuz statement will get that 'password' 
+				 and delete our records of users :(
+		Prepared Statement
+			extends statement 
+			not vulnerable to sql injection cuz the sql statement is 
+				precompiled before execution
+			eg. preparedstatement ps = con.prepareStatement(
+					'select password 
+					 from users 
+					 where username = ?');
+				ps.setString(1, 'drop table users');
+				ps.executeQuery() . IN THIS CASE, DROP TABLE USERS IS
+				A STRING. WE LOOK FOR A USER MATCHING THIS STRING, 
+				FIND NOTHING, AND NOTHING GOES WRONG. 
+		Callable statement.
+			used to create statements which execute stored procedures 
+			in our database
+			eg. CallableStatement cs = 
+					con.prepareCall("{my_proc(?,?)}");
+				cs.setInt(1,5);
+				cs.setString(2, "hello");
+				cs.execute();
+		Result Set
+			returns our data in jdbc from a query we make
+			pointer begins before the first row and we can
+				iterate through each row to process the data from
+				our query
+
+DAO : Data Access Object
+	sometimes for protection, we dont want direct access to the 
+		databse, especially for just read access commands.
+	lets us organize our code with a specific layyer designated for
+		data access
+	separation of concerns, more readable code
+	create interfaces, defining objects we wanna have when 
+		interacting with our databases
+
+SonarQube
+	code quality control. This will make us not compile if our code has bad style...
+
+	Sonar Cloud: instead of downloading qube, we can just login online
+				with account. We can use maven to run a command in 
+				the web's command line
+
+	SonarLint: includes an IDE that you can use for eclipse
+				//puts a blue squiggly on bad things
+				//you get it on spring by doing, Help, Eclipse Marketplace, and search it up
+
+	Logger
+		//put this at the top of file in your class
+		private static Logger log = Logger.getRootLogger();
+		//replace e.printStackTrace() with
+		log.error(e.getMessage());
+
+		//for 
+		println
+		do log.info("message here")
+
+
+	p0-cindy-peng ---> project naming convention
+
+
+
+
+
+
+	todo:
+	Callable Statement :(
+	log4j replace sysouts
+	use Sonarcloud
+	add 1 more junit test heheh
+	make email special too? :/
+
+	https://docs.oracle.com/javadb/10.8.3.0/ref/rrefsqljoffsetfetch.html
+
+	https://docs.oracle.com/javadb/10.8.3.0/ref/rrefsqljgrant.html
+	https://docs.oracle.com/cd/E13085_01/timesten.1121/e13076/accesscntl.htm#TTPLS269
+
+
+	

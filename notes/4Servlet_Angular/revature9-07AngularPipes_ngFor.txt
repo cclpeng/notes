@@ -1,0 +1,57 @@
+
+	In HTML:
+	<h1 *ngIf = 'Condition'>Heading</h1>   
+				condition=true  =====> Heading
+				condition=false =====> 
+
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Hire Date</th>
+		</tr>
+		<tr *ngFor = "let employee of employees">
+			<td>{{employee.name}}</td>
+			<td>{{employee.email}}</td>
+			<td>{{employee.hireDate}}</td>
+		</tr>
+	In TS:
+		employees = [{
+			name: 'sally'
+			email: 's@gmail'
+			hireDate: /3.5.12
+		}, {
+		    name: 'joe'
+		    email: 'joe@gmail'
+		    hireDate: /2/4/5
+		}, {
+			etc...
+		}]
+
+Pipes
+	Used to change way data is rendered or displayed
+		formating dates
+		format currency
+		transform text
+	use with string interpolation (below r examples built in pipes)
+		{{ product.name | uppercase }} Can chain pipes too! add more
+		{{ product.price | currency: 'USD' }}
+	*[ngModel] is one way databinding?? i thoughtit was 2 x.x
+
+	Custom Pipes:
+		Create a class
+		implement the transformation method A --> {{ __ | A }}
+		@Pipe({
+			name: "myPipe"    //must register this tho
+		})
+			Register with module, include in Declarations
+	When to use Custom Pipe? Example
+		say names are string-cheese, gala-apples, ground-beef.
+		BUT we want string cheese, gala apples, ground beef.
+		No existing pipe for that
+
+		in command line:
+			ng generate pipe folder/name-of-pipe   //if folder dont exist, makes one
+
+
+			

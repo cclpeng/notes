@@ -1,0 +1,9 @@
+Triggers
+	stored procedure which executes automatically based on certain
+	events
+	before/after
+	can use DML as a triggering event (update, delete insert)
+
+Sequences
+	we can create sequences & use in conjunction with triggers to 
+	assure uniqueness of primary key

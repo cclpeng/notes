@@ -1,0 +1,83 @@
+OOP: programming style where "objects" are the units of modularity
+
+Object: a software bundle with related states(variable) and behaviors(method)
+
+Class: template/blueprint used to define our object
+	instance and static variables
+	instance and static methods
+
+Example:
+	public class Bicycle {
+		int gear;
+		int speed;
+
+		void speedUp(int increment)
+		{
+			this.speed = this.speed + increment;
+		}
+		
+		void setGear(int newGear)
+		{
+			this.gear = newGear;
+		}
+	}
+	
+Access Modifiers:  <-- used for encapsulation
+	public: Any class, any package, any client
+	protected: Package lvl and by Inheritance (even if subclass in different package)
+	default: Package level access
+	private: Same class
+Non Access Modifiers:
+	final:
+	static: 
+	abstract:
+	transient:
+	synchronize: (for when working with threads)
+
+Scopes of variables in java
+	class(global) scope (eg. static variable), local scope(eg. instance variables: variables specific to an instance of an object)
+	class scope: static count variable for bicycles, keeps track globally
+	local scope: each speed variable made for each Bicycle can have different values, Instanced, local to an object
+	block scope: a variable defined within a flow of control statements, like loops
+		eg. int i = 4;
+		for(int i = 0; i < 2; i++);
+		    ---> then i at the end will be 4, but i at the end of loop is 2
+	Variable Shadowing
+		two variables declared in different scopes, and same name
+		not good thing, kind of like overriding, but iwth variable not methods
+			use this.gear = newGear; the "this" prevents variable shadowing
+
+method and block scopes don't have default values. but the public class bicycle have default gear and speed = 0;
+so local/instance and class/static scope have default values based on the type of the variable
+method and block must be declared by user. no default values
+
+
+Constructors:
+	use new keyword inside it to make an instance of an object.
+	always default constructor if none made
+example:
+	public class Fruit
+	{
+		private boolean isRipe;
+		public Fruit(boolean isRipe)
+		{
+			this.isRipe = isRipe;
+		}
+	}
+	
+	//in main...
+	Fruit apple = new Fruit(true);
+
+
+	public class Pear extends Fruit{
+		//default constructor will just call super(); with no arguments
+		public Pear(){ super(); }
+	}
+	//in main...
+	Pear p1 = new Pear();
+	
+Good habit to have a constructor with no arguments :O i guess
+		    
+
+
+

@@ -1,0 +1,51 @@
+View
+	virtual table we can create off a sql query
+
+Index
+	an in memory ordering set on a particular column
+	makes data retrieval more efficient
+	makes insertion/deletion less efficient
+	good in read-only situations
+
+Functions
+	scalar v aggregate
+	concat   count/sum
+
+	Can be used in select statements
+	only returns one thing
+
+	user defined functions are available
+		However, in defined function, we can only select, no DML.
+		only dql. 
+		Can make 0 to many arguments
+
+		eg. Syntax of creation:
+			CREATE FUNCTION FUNC([PROGRAMS])      or
+			CREATE OR REPLACE FUNCTION FUNC([PROGRAMS])
+			RETURN [DATA TYPE]
+			IS
+				--declare any extra variables
+			BEGIN
+				--executable code (which could use other funcs but not stored procedures)
+			END;
+			/ 		--make it end
+	Stored Procedures (Different from functions!!)
+		Saved block of pl/sql
+		Can't be used in select statements
+		can return 0 to many parameters
+		can take 0 to many parametrs INPUT, OUTPUT, OR BOTH PARAMETERS
+		Full use of DML and TCL
+
+		eg. how to create
+		CREATE PROCEDURE [NAME] [PARAMS]       or
+		CREATE OR REPLACE PROCEDURE __ __
+		--if you put output parameters in PARAMS, then don't need to specify rturn type..output parameter is rtn type
+		IS
+		BEGIN
+		END;
+		/    --let sql know were done w user defined
+			eg. 
+				let's say our stored procedure does x^y = z
+				specify as variables: x in type, y in type, z out type
+				my_procedure(x,y,z);
+				now z will carry our returned value

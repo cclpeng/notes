@@ -1,0 +1,117 @@
+//FIXME DIFFERENCE BETWEEN???
+    Javascript is Interpreted, not compiled
+        faster to develop, slower to run
+        runs line by line
+        no compile time error
+        Loosely typed-variable type doesnt have to be declared
+                     -can change var's type w/o cast
+                * this implicit type cast: called type coersion
+                     can say "==" operator allows for tc
+                     * "===" operator DOES NOT allow tc
+                Truthy/Falsy: We have this value bcuz of type
+                    coercion. (different vars return dif null/
+                    false value)
+                    Falsy: 0,null,NaN,"",undefined,false
+                        *NaN is a type number
+                    Truthy: not falsy
+            Data types  
+                Undefined, number, string, boolean, null 
+                Everything else is object. Everything in js 
+                thats not a primitive is an object     
+                EVEN FUNCTIONS!
+
+        Why we would want to use triple conversion ===?
+            What does 7+"7"?
+                14
+            What does 7+7+"7"?
+                147   ---> its a number..nvm its a string now lol
+            What does 7 + "cat"
+                7cat
+            What does 7/"cat"
+                NaN  -->Not a Number
+        NaN: often a result of numeric operations where we cant coerce
+            coerce a numeric result
+            What 7/"7"? 
+                1
+            What does "7"+7+7+7?
+                7777 string
+
+        Objects:
+            denote object by doing {}
+                eg obj = {}
+                    obj1={prop:val1, prop2:val2, etc}
+                    arr=[5,6,2,9]  -->arr[0] -> 5
+                            --> is actually {0:5, 1:6, 2:2, etc}
+                    obj2={red:7,green:10}
+                    //access
+                        obj2.red -> 7
+                        obj2[red] -> 7
+        Operator:
+            ==
+            ===
+            guard/default: similar to short circuit op of java. diff cuz
+                accept truthy/falsy too
+
+        ; injections:
+            eg.
+                function func(){
+                    return{
+                        "hello":"world"
+                    }
+                } 
+                This will return nothing, just return;
+                not "helloworld"
+            WHY?? Because of Semicolon Injection.
+            JS auto gives us semis to end, but then here
+                ended our statement before we wanted
+        Scopes
+            Global
+            Function/local
+            Block            came from keyword Let
+                can declare variable with let, as const,
+                    or as var       
+                Use let and const more. Let allows
+                    us to have our variables have block scope
+            Var 
+                No block scope, ALlows Variable Hoisting
+                    hoisting: var that's hoisted is brought
+                        to the top of our scope
+                eg. console.log(x)     console.log(y)
+                    var x;             let y;
+                    Result: x is undefined, y has error
+                    x got hoisted? so its treated like it was
+                    coded before it got called in log(x)
+
+        Default(||) and Guard(&&) operators
+        guard
+        A     B
+        true&&true >> true --> rtn B
+        true&&false>> false --> rtn B
+        false&&true>> false --> rtn A
+        false&&false>>false --> rtn A
+            if A can be type coerced to true, we return B
+            if A is type coerced to false, return A
+        eg.
+            0 && "" --> 0 (rtned A)
+            null&&"cat"--> null (rtned A)
+            5&&"yellow"-->"yellow" (rtned B)
+        Default 
+        true||true >> true --> rtn A
+        true||false>> true --> rtn A
+        false||true>> true --> rtn B
+        false||false>>false --> rtn B
+        eg.
+            0 && "" --> "" (rtned B)
+            null&&"cat"--> cat (rtned B)
+            5&&"yellow"-->5 (rtned A)
+    eg. "x"&&""||"yellow"&&true&&"j"
+        ==> "j"   (Go LEFt to RIght)
+        
+         A                 1   B       2          3  C
+        ((null || "hello") ? ((47&&"") ? "y":"z") :"x")
+        ==> "z"
+        ()?():(). So evaluate A. If True, go with B.
+                                Else, go with C.
+        A gets "hello", which is true. So go with B.
+        B gets "z". so returns "z"
+

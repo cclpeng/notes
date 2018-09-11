@@ -1,0 +1,21 @@
+software development lifecycles
+
+Types of cycles, Methodologies
+	waterfall
+		linear way to create the project. step by step
+		if one step has to be refactored, evverrrything has to start 	over
+		Stages: Requirements, Design, Implementation, Testing, 
+				Maintenance
+	agile
+		dynamic, flexible, iterative process during which 
+			requirements can change, processes can adapt
+		daily standups - a time to share progress, goals, and issues
+		"user stories" are defined unit of work
+
+		Scrum: implementation of agile methodology
+			iteration called Sprints. with sprint reviews
+		Kanban: different swim lanes (ppl are going at different 	
+			paces). Groups are going different times. SOme have a later or earlier deadline. Less restrictive than scrum,
+			but scrum is more organized, at least everyone's on same
+			timeline. Can cooperate more if one grp finishes earlier
+		

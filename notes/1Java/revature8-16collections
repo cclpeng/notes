@@ -1,0 +1,214 @@
+Collections is Classes
+
+Collection is the big umbrella term INTERFACE 
+						Collection     <---Big Interface
+	Set 	List 	Map 	Queue      <---sub Interfaces
+				Collections          <----- Big class
+    hashmap vector arraylist stack, hashmap, etc. <--- sub classes
+
+Make a ppt
+	Hows interface differnt from others
+	wats the point of each subclass, what is each subclass
+	Some examples of how to use each subclass, when to use
+
+
+List -> 2				vs Set, Map, Queue
+	Vector, ArrayList, linkedlist, stack
+
+How List is different
+	Ordered Collection/Sequence					vs Set/Map unordered
+	Elements Accessible by index position		vs Queue not searchable
+	Elements are searchable						vs Queue same
+	Duplicate elements allowed					vs Set & map only unique elements
+
+Vector and ArrayList
+	Implementation: Dynamic Arrays, resizes so that unlike with arrays, it's mutable
+	Difference: The way they resize. Vector is synchronized while ArrayList asynchronized. ArrayList is faster, but Vector is more secure
+
+	Difference:
+	Use Vector/ArrayList over Linked List and Stack when you want to get instantly rather than iteratively
+	Use over Stack when you want to be able to access a specific element
+
+	How to use in Java:
+
+
+LinkedList
+	Implementation: Sequence of elements. Each element is a separate object. 
+					The element should have two items - the data and a reference
+					to the next element. The last node has a reference to null,
+					and the entry point to the linked list is the first element
+					that is usually called head
+
+	Good if you dont know the element held
+
+
+
+
+Set
+	summary:
+		no duplicate elements, unique
+		at most 1 null elem
+	Pros:
+		Fast search
+
+	Real life examples
+		Want timers on your phone that are unique
+		String pool
+
+	AbstractSet
+		super class that has Hash Set. Has .equals and hashcode() funcs implemented
+	HashSet		===>   //Set<Integer> mySet = new HashSet<Integer>();
+		LinkedList hash set
+				Maintains order unlike hash set
+				Extends Serializable
+	SortedSet
+		Does have ordering. 
+		.comparator(),     first(), last(),    
+		subset(first elem, last elem)
+
+	NavigableSet
+		descendingSet() reverse order
+		floor(item)    	closest (lowest) to the item, and including the item
+		lower(item)     closest but must be lower than item
+		ceiling(item)   closest(higher) to the item and including the item
+		higher(item)	closest but must be higher than item
+
+		eg.
+		NavigableSet<Integer> ns = new TreeSet<>();
+		ns.add(0)
+		ns.add(1)
+				// =====> set looks like [0, 1]
+		***NO DUPLICATE VALUES. Difference between set and sequence
+
+	
+
+Queues
+	Queue
+		Bounded v Unbounded
+			un: util.package - Stores unlimited #
+			//FIXME GOOGLE REST
+	When to use
+		When a set has no elems, returns false.
+		Queeu throws exception or rtn null depending on operation
+
+	Universal method
+		add()
+		addAll(collection)
+		clear()
+		equals(object)   // like == but for Value not memory
+		isEmpty()       //good for iterating
+		iterator()		//make an iterator class object
+		size()
+		remove()
+
+		offer() add to queue, returns boolean for if it was added or not
+		poll() Same as remove but returns null for an empty queue instead ofexcepti
+		element() retrieves head value but doesnt move past it, like peek()
+
+	Priority Queue  
+		Ordered objects according to comparator
+		"Least" element is first out
+		capacity not bounded
+
+		Some notable, more special constructor
+			PriorityQueueu(Comparator<? super E> c) <=== give it a comparator
+			PQ(35) //give intial capacity 35
+
+	Blocking Queue
+		Sometimes has a capacity bound
+		has Waiting versions of pop and push - Ideal for Consumer and Producer case
+			Bool offer(e, time, unit)
+				//how long to wait i guess
+		Has a remove() function. Removes REGARDLESS location
+		Thread safe
+	Priority blocking queue
+		Combo
+		Unbounded, ordered by comparator
+		take() retrieves, removes head. If no elements, waits
+
+		PriorityBlockingQueue<Integer> q = new PriorityBlockingQueue<Integer> ();
+
+Map
+	Subclasses: SortedMap and NavigableMap
+	General Constructor: 
+		Map<Integer, String> = new HashMap<Integer, String>();
+
+	No add. Do map.put("Abe", 23);				---> adds
+			   map.put("Pranav", 23);
+			   	  .containsKey(variable)
+			   map.get(key)						---> returns value
+
+
+	Hash Map:
+		Hashing to find key quickly from the int value
+		Concepts:   "Sally" 22, "May" 23. Name will be the key.
+					Keys: "sally", "May"
+				Use .hashCode() to generate a number key
+				String s = "sally"
+				s.hashCode()
+		No Duplicate Keys
+		Use more memory than ArrayList
+		For small amounts of data, better to do array/list because of the 
+			hashing Overhead time
+	Linked Hash Map:
+		sorts the keys i think...
+	Weak Hash map
+		Uses weak keys. Allow null key, null value.
+		If null key, GC will grab and remove
+
+	Dictionary Class
+		HashTable is Synchronized
+		1:1 ONLY. like real dictionaries - 1 word, 1 definition.
+
+		**Hashtable<K,V> extends Dictionary<K,V> implements Map<K,V>, Cloneable, 			Serializable
+
+
+
+	Collection vs Collections
+		Collection: interface used for sets order dont matter
+			List, Set, Deque, Queue
+
+		Collections is a Class with Static mehtods (to work more easily with
+					interfaces)
+			ArrayList....ohters Vector, HashSet, Priority queue
+
+		Collection.min/max to find lowest/highest
+
+	Generics
+		Placeholder ----> <>
+		Able to code without knowing ahead of time what type it will be
+			Pros: Lets Developers write any kidn of class
+			Cons: can't use primitives, at leat in Java
+
+	public int compareTo(SomeComparable sc){ //body }
+
+	Can Override
+	class NameofClass implements Comparator
+	{
+		public int compareTo(Apple other) {
+			if (this.member < other.member)
+				return -1;
+			if(this.member > other.member)
+				return 1;
+		}
+	}
+
+	Iterator Interface Methods (not a class)
+		hasNext()
+		next()
+		remove()	//dont just remove() remove() remove(), do 
+					//next() remove() next() remove(). Once per next()
+		*Must import iterator either through util.iterator or importing
+			java collecion objects (already have)
+
+
+			Iterator it = animalList.iterator();
+			while(it.hasNext())
+			{
+				it.next() do stuff w it
+			}
+
+
+
+
+

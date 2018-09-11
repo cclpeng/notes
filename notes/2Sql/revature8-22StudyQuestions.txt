@@ -1,0 +1,3 @@
+Definition of a join?
+				query that spans more than 1 table
+List types of joins

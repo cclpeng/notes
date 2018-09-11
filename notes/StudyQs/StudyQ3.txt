@@ -1,0 +1,267 @@
+
+which html elems are self closing? 
+	img, input, link
+
+span vs div?
+	div picks elems, span picks words :). Inline Division vs Block Div
+
+3 Ways add CSS?
+	in an element tag, just change style (in line)
+	CSS linked SHeet (external)
+	(internal) Style tag block in HTML
+
+HTTP
+	hyper text transfer protocol
+
+html?
+	hyper text markup language. uses tags to describe the website's structure. Building blocks of the website
+
+-------------------------------------------------------JS
+java has methods, javascript has functions
+
+Coercion:
+	implicit forced type casting
+
+falsy:
+	null, "", NaN, false, undefined, 0
+Data types?
+	Number, Undefined, String, Null, symbol, boolean
+What is interpreted vs Compiled language
+	interpreted runs line by line
+	Benefit is faster to code,
+	however, slower to run than compiled languag
+Guard operator? 
+	&&    . with booleans, is short circuited, but can be used w other vals!
+Default operator?
+	||      eg A||B. If A,return A.
+Block scope?
+	let, const.   var
+What is const?
+	const let
+doesnt allow for granular controller/block scope?
+	var
+What is variable hoisting?
+	when a variable is lifted to the top of its scope. If it's undeclared variable (a = 34; without let, var, or const), then
+	it will just be hoisted to global
+
+What is semicolon injectig?
+	js auto adds semicolons if no { bracket eg.
+		return   <==auto adds a semi colon
+		{     
+		return { <==doesnt add semi colon
+
+What is closure/
+	fuction inside a function. returns a variable available in the outer function. allows access of the variable outside of both functions because the inner function is declared with the same
+	scope as the variable it 
+	function(){
+		var a;
+		function(){			<=== has access to scope above it
+			console.log(a++);  <== so it can access "a"
+		}
+	}
+
+Dom?
+	document object model. Representing HTML elements as javascript objects (or nodes)
+
+Top of dom?
+	window ->  document ->html	-> head
+								-> body
+DOM 
+	firstChild, lastChild, nextSibling, previousSibling
+	 parentNode
+What are events?
+	interactions with the user that can be kept track of w js
+3 ways to set events?
+	JS: addEventListener("___", function, useCapture(true/false))
+	addEventListener("click", function, true); //default FALSE (bubbling)
+	can also do getElementById("").onclick = "function()";
+	can aslo do <select onclick="function()">
+
+
+whats propagation?
+	interract w object. and the event triggers for all its parents/child. that would be propagating
+What's stopPropagation and stopImmediatePropagation
+	
+what is capture? bubble?
+	capture going down to children, bubble going up parent.
+
+callback function?
+	function name passed as a parameter of an argument. eg is in
+	addEventListener. THe function passed in is a callback function
+
+json
+	java script object NOTATION
+	get info from a web api/ database. has the ``
+
+language agnostic data format
+	any language can be turned to another??
+
+two json fuctions?
+	JSON.parse takes in: JSONstring ==> Javascript obj
+	JSON.Stringify takes in: JS object ==> JSON string ...eg. can print obj
+
+Template literal?
+	string interpolation -->  ${}
+
+asynchrononous javascript axml... AJAX
+	asynch: dont have to wait for a request and returning message
+			before sending more requests
+protocol describing how to handle communication over a 
+    network?
+    http
+
+what goes in the head?
+	title, metadata, links, 
+
+
+cascading?
+	for css means Inline has precedence over internal, over ex
+
+what is post and get?
+	post. when we dont want credentials to be shown. Sending
+	get. Retrieving.
+
+what is cdn?
+	content delivery network. how we linke our apps to bootstrap
+
+is html a programming language? wat about js?
+	no and yes
+
+{}+{} = ?
+	NaN
+[]+[] = ?
+	[]  see others in notes 
+[] +{} =
+	
+{} + [] =
+
+what will everything thats not primitive inherit from?
+	object
+Properties of an object?
+	
+Guard/defaultoperators
+	work with truty/falsy values too not just boolean
+
+DOM manipulation?
+	javascript use to manipulate the document object model. changing
+	html elements using javascript, without changeing html
+	window, document, html, etc
+
+	dynamically remove/add things from the dom
+
+if capture/bubble are both on?
+	capture takes precedence.
+
+EventListener: the optional flag? tell more
+	it's called useCapture. default set to false (use bubbling)
+	can set to true
+
+JSON?
+	pull information from elsewhere. 
+
+template literal
+	https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+	allows for multiline strings + str interpolation(vs extrapolation)
+	String Interpolations where you evaluate the string inside the ${}, and replace ${} witht the value of the evaluated string
+	a = 5; ${a} takes "a" and evaluates, replacing with "5"
+
+ajax
+	asynchronous javascript and xml
+		what it is is procedure to access web servers from a web page
+Included in HTTP request?
+	http method, header request, body request, url, http version
+what are http methods? 
+	8 of them: get, put, post, delete, trace, patch, options, head 
+included in http response?
+	status code
+xml HTTP request properties
+	readyState, onreadyStateChange, statusCode, statusText, responseT
+list of Xml HTTP Request readyState properties
+	UNSENT, OPENED, HEADERS RECEIVED, LOADING, DONE
+ajax workflow?
+	make new XML HtTP request object
+	request headers
+	open
+	send
+
+xml?
+	extensible markup language
+
+wellformed xml vs valid xml?
+	syntactically works,   <= 
+	schemas defined elsewhere <= valid. does what is intended
+
+
+DTD - <!DOCTYPE html> <== google more Documet Type Definition
+DTD Document Type Definition
+PCD Parsed Character Data. tags treated as markup. elements expande
+CD Unparsed character data.
+XSD XML Schema Definition
+xml schema - sxd. written in xml. can declare simple and complex types 
+xml namespace = anyone can create their own tags
+	names let us diffferentiate between other users code
+	xmlns:"namespace"
+parsing xml: 
+
+jaxp
+ java api for xml processing
+ 	theres 2 ways DOM. loads all of the tree model into memory. fast
+ 	for small files, slow for large files. Better way for large files
+ 	is using the Simple API for XML parsing. This is read only, and 
+ 	streams the data without loading into memory. Fast for large files.
+
+ 	marshalling: Turning the Java object into XML string.
+ 	Unmarshalling: Turning the XML String back into the Java object
+
+ xmins:prefix="" <== How to declare a namespace. kind of like an attribute for xml schema tag. <xs:schema xmins:prefix="">
+
+
+
+
+
+== weak comparison
+=== strong comparison
+
+
+What is the difference between == and ===?
+What is the AJAX workflow?
+What is AJAX?
+What are some of the different HTTP verbs?
+What are the different HTTP status codes?
+What are the ready states of an XHR object?
+Describe the node hierarchy of the DOM.
+What's the difference between stopPropagation and stopImmediatePropagation?
+What is event propagation?
+What is the difference between DOM and SAX parsing?
+What's the difference between waterfall and agile methodology?
+What is scrum?
+What are our truthy and falsy values?
+What is a closure?
+What is variable hoisting? Under what conditions will my variable be hoisted?
+What conditions must be met for a database to be normalized to the second normal form?
+What is prototype inheritance?
+What is a template literal? What is the benefit of using one?
+What is the difference between var, let, and const?
+What is type coercion? What about JavaScript makes it possible?
+How would I access extra parameters beyond those defined in my function declaration?
+What is a guard operator?
+What is a default operator?
+What is a callback function? When have we used them?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

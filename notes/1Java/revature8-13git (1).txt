@@ -1,0 +1,47 @@
+
+Can set an account identity:
+	git config --global user.email "email"
+	git config --global user.name "name"
+	
+	git config user.email "email"   <--------- means set only this repository's identity, not global
+
+
+
+
+1. Clone remote github repository in an empty folder 
+> git clone https://github.com/1808-Aug13-Java/batch-source.git
+
+2. Navigate into the batch-source folder, which should appear wherever you cloned the repository.
+    	Use the cd command to change directory
+
+3. Create a local repository within the batch-source folder
+> git init
+
+4. Store the location of the remote repository in the directory where your local repository is. 
+> git remote add origin https://github.com/1808-Aug13-Java/batch-source.git
+   	 This will save a remote name of origin associated with the remote url       **means when u push changes to the
+								**original remote repo, git will know where that is lol ;)
+
+5. Create a branch in your local repository with your first and last name
+> git checkout -b First_Last			**in original remote repo on github, there are branches :O This is how u make one! :DD
+					**the branch will be a repository with your edits called Cindy_Peng
+
+6. create a branch in the remote repository (this will be in the repository at GitHub.com) with the same name as your local branch
+
+-- You are ready to push your commits to the remote repository --    
+    
+To commit your code locally: 
+1. First you must add your changes to the staging area git 
+> git add -A     
+    This will add all of your changes   
+> git add file.txt      		**btw, this file.txt must be IN the local repository lol
+    This will add file.txt to the staging area    
+
+** to see what changes are present and which have been added to staging at any time, the command `git status` will show you
+
+2. Committing your code after this will commit the changes from everything in the staging area    **make the commit message
+> git commit -m "A concise but descriptive description of your commit goes here"
+
+To push your commits to your remote repository			**finally, push your branch to the origin repo
+> git push origin First_Last
+

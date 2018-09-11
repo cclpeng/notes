@@ -1,0 +1,123 @@
+Route Configuration
+//FIXME google more
+	include RouterModule in our AppModule Imports
+		->RouterModule.forRoot([])
+					our array of routes, which includes objects with
+					components and their paths
+	Can activate routes, similarly to how we'd include traditional 
+		links in html
+
+		routerLink='/home'     designate path we want injected
+		<router-outlet></>     where our components will be inj
+
+		:var  <-- parameter in our path
+
+
+example
+	1. make routes.ts in app folder
+	2. routes.ts: 
+		import { Routes } from '@angular/router';
+
+		export const appRoutes:Routes = [
+			{	//provide simple objects
+				path: 'first',
+				component: FirstComponent
+			}, {
+				path: 'directives',       //changed from a-directives
+				component: DirectivesComponent //used be ADirectivesC
+				children: [
+					{
+						path: 'structural',
+						component: SDirectivesComponent
+					}, {
+						path: 'attributes',
+						component: ADirectivesComponent
+					}
+				]
+			}, {
+				path: 'clicker',
+				component: ClickerComponent
+			}, {
+				path: 'posts',
+				component: HttpExampleComponent
+			}, {
+				path: 'pipes',
+				component: PipeDemoComponent
+			}, {
+				path: 's-directives',
+				component: SDirectivesComponent
+			{, {
+				path: ''
+				component:   <====forgot one, but i forgot name
+			}, {
+				//this is for wildcard, anything else
+				path: '**',
+				pathMatch: 'full',
+				redirectTo: ''
+			}
+		]
+
+	3. app.module.ts: declare it? in 
+		imports: [  RouterModule.forRoot(appRoutes) ]
+		 //must also import other 
+
+	4. app.component.html::
+		<router-outlet></> <-- put this in the end
+
+	5. Now Test this: enter url localhost:4200/post
+		should get individual component html page
+
+	6. Still these are separate web pages. must put it together
+		ng g c components/nav
+
+		on app.component.html: add the new
+			<app-nav><>
+	7.Now back in nav.html:
+		make watever u like. Buttons/links to take u to ur routes
+		<button class = "btn btn-info" routerLink="\first">
+			First
+		</button>
+
+		<button class = "btn btn-info" routerLink="\a-directives">
+			Attribute Directives
+		</button>
+
+		<button class = "btn btn-info" routerLink="\clicker">
+			Clicker
+		</button>
+		<button class = "btn btn-info" routerLink="\posts">
+			Posts
+		</button>
+		...
+
+		Now can swtich btw html pages w/ no reload
+	8. Back to routes.ts: Make more organized..
+		{
+			path: 'directives',       //changed from a-directives
+			component: DirectivesComponent //used be ADirectivesC
+			children: [
+				{
+					path: 'structural',
+					component: SDirectivesComponent
+				}, {
+					path: 'attributes',
+					component: ADirectivesComponent
+				}
+			]
+		},
+
+		Remove from navs.html the 2 directives links
+		replace with /directives.
+	9. in Directives.html
+		make <button class="btn btn-success" routerLink=
+										"./attribute">
+				Attribute
+			</button>
+		<button class="btn btn-success" routerLink="./structural">
+			Structural
+		</button>
+
+		<router-outlet></   <== add this so that those componetns
+			//will be injected there
+
+	10. 

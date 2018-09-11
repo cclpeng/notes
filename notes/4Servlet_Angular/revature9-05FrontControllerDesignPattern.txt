@@ -1,0 +1,18 @@
+
+Front Controller Design Pattern
+	Same as usual Servlet cycle, but now we'll have a 
+	Master Servlet acting as our "Front Controller"
+	Diagram:       _____________________________
+	|client| ----->|server:| web container
+	|	   |	   |	   |DD    
+	|	   |	   |	   ||	  ^ Request Helper
+	|______|	   |_______||	 /	
+				    	   |v	v
+				    	   |Master -->servlet a ---> servlet b
+						   |Servlet	
+
+		"master servlet" or "dispatcher servlet" acts as our front
+			controller and can route request accordingly
+			Many master servls use a Request Helper 
+		our front controller can handle all of the application-wide
+			needs such as caching or session management

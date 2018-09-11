@@ -1,0 +1,36 @@
+session management, Persistence across diff web pages
+we're doing angular tomorrow :( 9-06. can google a bit if helpful
+
+Session Management: (4 ways, sess obj best)
+	save username/id. generate a nav bar based on a specific username
+	can save the nav bar in the session object and itll load
+	only saves a small string tho
+
+	Cookies:
+		simple name pairs stored inthe browser
+		limited to text
+		don't have complete control on the service side
+			can be disabled by user
+	URL Rewriting:
+		saving information as appended to the url
+		a lot of maintain
+		cant be disabled like cookies
+		exposes our data to the user
+	Hidden Form Fields:
+		including form submission throughout our application to 
+			maintain a state using request parameters
+		Information isnt as exposed as url rewriting & cant be 
+			disabled, but is still difficult to maintain
+	Session Object:
+		allows us to maintain session on server side, 
+			request.getSession()  ---returns---> 
+				1. current session if there's currently a session
+				Or
+				2. create a new session
+			request.getSession(true) new session created if none rn
+			request.getSession(false) no new session created
+
+
+
+
+

@@ -1,0 +1,29 @@
+what's a view?
+
+What does PL SQL?
+		procedural language, structured query language. used for oracle
+Can you use a stored procedure in a select statement?
+		no
+
+Similar and difference of function vs Stored Procedure?
+		stored procedure more flexible than function, but function you're allowed to use other functions and use inside select statements. like can do SELECT AVG(), but cant make a procedure called DIRT and do SELECT DIRT()
+
+		Stored Procedure you can return multiple parameters and edit
+		data using DML/TCL.
+
+		Function can use other system defined functions, select.
+		SP can take input or output or both params, Function only input
+
+		Both take 0 to many parameters
+
+WHAT IS a cursor and why do we wanna use it? sql stored procedure
+
+	//fIXME
+
+Implicit vs Explicit cursor?
+	//fixme lol
+
+
+
+FER-AGIL,CRIT/VERSA, MAST
+GUAR-

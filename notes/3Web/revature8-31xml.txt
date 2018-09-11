@@ -1,0 +1,15 @@
+<employee>
+	<name>Joe</name>
+	<email>sldkfdsj@sd</email>
+</employee>
+			___________________________			Front ENd      Weather
+sql <==JDBC==>|Java                   |<==AJAX==|     |===>AJAX=>API
+			  |     |         |       |==AJAX==>|     |      |   
+			  | DAO | Service |Servlet|         |html |      |
+			  |     |         |       |         |     | JS   |
+			  |     |         |       |         |     |      |
+			  -------------------------         -------------
+
+Servlet API dependency in pom
+	deployment descriptor
+	packaged as a war

@@ -1,0 +1,127 @@
+Angular js
+
+		kind of like jquerry. throw in cdn and can create controllers
+	Javascript framework
+		html templates
+		typescript
+	Benefits
+		modularity, expressive, takes advantage of powerful
+			 databinding
+		An application is broken down into a set of components, 
+			including services, which provide functionality to 	
+			multiple components
+
+	Single Page Application (SPA)
+		just 1 html page. when we click something, we inject html, 
+		swaps html. 
+		Benefit?
+			speed. dont have to reload bootstrap, scripts, etc
+			Initial load time of master page is slow, but after, fast
+
+	Creating an Angular pp
+		Create file structure manually
+		clone a starter project in github
+		user npm and command line tools to generate it
+
+	Structure
+		Module:   app module
+			root component  <---- app component
+				 ^	^  ^
+				/   |   \
+
+	node.js
+		instead of doing: console.log("jello from js");
+		like in js. Withnode, can do
+			>node test
+			>Hello from js
+		Must download node.js first 
+		(comes w/ npm: Node Pckg Manager)
+			we can use to download dependencies
+			npm install will download dep. in our packag.json
+			npm install [dependency]
+
+	Verify node install
+		download node js
+		node -v
+		npm -v
+		sudo npm install -g typescript
+		tsc -v
+
+
+Typescript
+	has more type safety than js
+
+
+
+
+Application
+	Sets of components organized into modules
+		main.ts: 	   		start pt of our app
+		app.module.ts: 		defines how to aseemble the app
+					   			declare all components associated w 
+					   			module, services, pipes, other modules
+		app.component.ts: 	declare our root component
+							1. template(html) (our view)
+							2. typescript     (our controller)
+							3. css
+							4. spec.ts (testing)
+
+		Diagram
+												  --> comp a -> comp c
+		main.ts -> app.module -> app component-->		     -> comp d
+												  --> comp b
+												  --> comp c
+			we can define a custom directive associated with a 
+			component (<app-root> for app-component)
+
+			index.html <-- has full html structure (no other html has)
+				<html>
+					<head>
+					<body>
+						<app-root>
+				*watevers in ur app-root is like substitution
+				app.component.html:
+					<p> hello from root component </p>
+
+	What is a component?
+		Template+Class+Metadata   *class is typescript class
+			app.component.ts:
+				@Component(   <---decorator: func providing metadata
+					template: '<p>somehtml',
+					selector: 'app-route',    <------
+						--------custom directive to inject component
+						--------view into other HTML
+					StyleUns:['css1', 'css2', 'css3', ..etc ]
+				)
+
+				export class AppComponent{
+					//variables and methods
+				}
+		What is a decorator in the component? ^^ see above
+
+			app.module.ts:
+				//imports
+				@ngModule({
+					declarations:[AppComponent, AComponent] -->
+						-->components and pipes
+					imports:[] --> declare any external modules
+					providers:[] --> dec. register services in module
+					bootstrap:[AppComponent] -> specify root componen
+				})
+
+				export class AppModule{}
+
+
+
+
+
+Cath up :(
+	angular.json:
+		find styles
+			"styles":[
+				"styles.css",
+				"node_modules/bootstrap/dist/css/bootstrap.min.css"
+			],
+
+
+

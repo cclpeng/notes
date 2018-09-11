@@ -1,0 +1,8 @@
+Reflection:
+	an API used to inspect classes, interface, methods at run time without knowing the names of these at compile time
+		get implemented interfaces or super classes, method signatures and properties, and access modifiers
+		can change these property values and execute methods 
+
+		good time to use: used mostly in debuggers, frameworks(so other frameworks can interact too)
+
+		cons: If you're getting a method signature but no exist, get NoSuchMethodException, exposes innerworkings of ur program

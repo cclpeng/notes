@@ -1,0 +1,10 @@
+Scanner class
+lets you get user inputs from a console
+
+	methods returning boolean, true for if it checked and there was input or a certain kind of input
+	eg. hasNext(), hasNextInt(), etc
+
+	methods which return user input
+		next(), nextInt(), nextBoolean(), etc
+
+	

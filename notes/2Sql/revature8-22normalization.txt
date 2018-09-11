@@ -1,0 +1,90 @@
+Normalization
+	organizing our database in order to reduce redundancy and prevent 
+	data anomalies. Organizing can mean spreading the information
+	of one table into multiple tables
+		why reduce redundancy?
+			help save space
+
+WHen not normalize something? Denormalization
+	if we're using the same joins all the time across the newly created tables, maybe better to just have the redundant data
+	many normal forms, a db is considered to be sufficiently 
+		normalized after 3
+	benefits of norm/denormalization
+		
+		First Normal Form: Each record needs a unique identifier 
+							(primary key)
+							no duplicate rows
+							atomic values
+//FIXME atomic values heheh :) Everything in the column has to be
+								a single value. No lists of values
+
+		Second Normal Form: first normal + eliminate partial 
+							dependencies
+							a column which is dependent on part of a 
+								composite key
+									composite keys primary key
+									made of more than 1 column
+		if no composite keys tho,
+		Third Normal Form: Meet 2nd normal, No Transitive Dependencies
+			a column which derives its value from another column
+
+
+	eg.
+				Invoice 105
+							8/21/18
+							Dan
+				Item 	   quantity 	price		total
+				toothbrush    2			2		    4
+				pillow		  5 		12			60
+				toothpaste    1 		6 			6
+				candle 		  3 		10 			30
+													100
+COMPOSITE KEY
+/   	\						Invoice
+ln #	id 		date 	purchaser 	item 	quantity 	price, 	linepr
+(1		105) 	8/21 	dan 		toothb 	2 			2 		4
+(2		105) 	8/21 	dan 		pillow  5 			12 		60
+(3		105) 	8/21 	dan 		toothpa 1 			6 		6
+(4		105) 	8/21 	dan  		candle  3  			10  	30
+(1		198) 	8/22 	sally 		candle  5 			10 		50
+(2		198) 	8/22 	sally 		robscop 1 			5 		5
+
+//this is first normal
+//how second formal?? Reduce redundancy of Dan Dan Dan
+	make a second table:
+		Invoice
+		invoiceID 	purchaser 	date
+		105 		dan 		8/21/2018
+		198 		sally 		8/22/2018
+	change first table: (remove date and purchaser)
+
+				COMPOSITE KEY
+		/   	\						Invoice
+		ln #	id 		item 	quantity 	price, 	linepr
+		(1		105) 	toothb 	2 			2 		4
+		(2		105) 	pillow  5 			12 		60
+		(3		105) 	toothpa 1 			6 		6
+		(4		105) 	candle  3  			10  	30
+		(1		198) 	candle  5 			10 		50
+		(2		198) 	robscop 1 			5 		5
+
+	//Now THird Normal Form
+	Make a third table: for item
+		ItemId 		ItemName 		Item Price
+		1			toothb 			2
+		2			pillow 			12
+		3			toothpa 		6
+		4			candle 			10
+		5			robscop 		5
+		Change first table: (add an item ID, delete line price, price, item)
+			COMPOSITE KEY
+			/   	\						Invoice
+			ln #	id 		itemID 	quantity 
+			(1		105) 	1 		2 			
+			(2		105) 	2  		5	 			
+			(3		105) 	3 		1 			
+			(4		105) 	4  		3  			
+			(1		198) 	4  		5 		
+			(2		198) 	5 		1 			
+
+

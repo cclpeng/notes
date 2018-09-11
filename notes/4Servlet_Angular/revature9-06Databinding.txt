@@ -1,0 +1,51 @@
+https://alligator.io/angular/data-binding-angular/
+
+One Way Databinding
+	-string interpolation {{variable}} to view contents 
+		<--template expression
+	 (could also use ngBind to set or could also useproperty binding).
+	 	eg. ngBind: <p ngBind='variable'>"Sally"</p>
+	 			This will make the .ts variable set to innerHTML "Sally"
+	-wat it does (where view is the html container displaying everything and model would be i guess the typescript/java stuff)
+		view <--------- controller/model
+
+Two Way Databinding
+	View and model/controller are linked. WHen view is updated, model is updated, and vice versa. Makes view and model synchronized. 
+	wat it does
+		view <---------> controller
+	How to do?
+		[ngModel] = 'variable'    (we get ngModel from FormsModule we import (wont auto import for us btw. u must write out entirely))
+	eg. ngModel: <input ngModel='variable'>
+				 <p>The new variable: {{variable}} </p>
+	 			This is good for input stuff. Whatever is read into the input box gets read into that variable. Whenever you type into the text box something new, if you display variable in the html with interpolation like {{variable}}, it will be updated.
+
+	 			ngModel is 2 way because the ex is saying that dom input's value is default from the value of the component's variable. (one way comp -> dom). However, if the user inputs something, an event that would be registered on the dom side, then the value of the component's variable will be updated (one way dom -> comp)
+
+
+Directives:
+	a Custom element/attribute. expands on HTML capabilities of raw 
+		html
+		eg.
+			selectors like <app-favorite></app-favorite>
+
+		Angular provides us w many Structural + Attribute Directives
+			Structural Directive:
+				change way elements are rendered, or if they're 
+					rendered at all. Dynamicallly renders elems
+					eg. *ngFor, *ngIf, [ngSwitch], *ngSwitchCase, 
+						*ngSwitchDefault
+						ngIf -> if false, elem not rendered :O. Element is literally deleted from DOm
+			Attribute Directive:
+				Control the way theelment is displayed (eg. ngClass)
+				(ngStyle) dynamically changeing the part of the elem
+				eg. ngClass, ngStyle, ngModel
+					
+
+	Property Binding: One way data binding between the Component to the DOM; View to the model/controller. 
+		eg. [class.glyphcon-star] = "var"
+
+	Finally there's
+	EventBinding:    One way data binding between DOM and template view/component:When a specific DOM event happens (eg.: click, change, keyup), call the specified specified method in the component. In the example below, the function() method from the component is called when the button is clicked:
+		(click) = "function()"></>
+
+

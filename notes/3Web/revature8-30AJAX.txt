@@ -1,0 +1,74 @@
+AJAX
+asynchronous javascript and xml(tho nowadays JSON is used)
+a technique (not programming language) to access web servers from
+    a webpage. 
+a: occurs behind the scenes. operations need not wait 
+    on completion of the request/response
+        eg. client(browser)         server
+            --> XML HttpRequest created, sent to server. 
+                Server processes request. Prepares response
+            <-- httpResponse sent ack to client, 
+                client processes response. Updates page
+
+HTTP: hypertext transfer protocol
+    protocol describing how to handle communication over a 
+    network. How to transfer files across World Wide Web
+        HTTP Request includes:
+            http method    
+                    post for google search. 
+                    get for logical search (like is === password?). safer
+                ==> GET, POST, PUT, DELETE, PATCH, TRACE, OPTIONS, HEAD
+                   (  ^^   like CRUD  ^^  )  Patch is kind of like update
+            request header
+            request body(optional)
+            http version
+            url
+        HTTP Response includes:
+            Status Code:
+                Responses:
+                100s Informational ----> gives something informatioal...nothing wrong
+                200s success
+                300s redirection --->"redirecting u to ___ webpage"
+
+                Error messages:
+                400s client side errors
+                     404 not found
+                500s server side error
+            
+XML HttP request
+    new XMLHTTPRequest
+    Methods:
+        open([method],[url],[async](defaults to true))
+        send((optional)any content for a post)
+        setRequestHeaders
+
+    Properties:
+        readyStates ==> 
+            0 UNSENT  (instance of request rdy, not sent)
+            1 OPENED  
+            2 HEADErS ReCEIVED. status quote, and request. just 
+                                not the body yet is known
+            3 LOADING. havnet received entirety of response
+            4 DONE  entirely received
+        onreadystatechange Property
+        statusText
+        responseText
+        StatusCode
+
+JSON:    xhr means xml http request
+    let xhr = new XmlHTTPRequest();
+    xhr.onreadystatechange = function(){
+        if(this.readyState === 4 && 
+            this.statusCode === 200){
+            func(xhr.responseText);
+        }   
+    }
+    xhr.open(method, url);
+    //opened, now send
+    xhr.send();
+
+AJAX workflow/steps. see example above
+    make request, request header, open, send
+
+
+

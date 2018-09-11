@@ -1,0 +1,15 @@
+JSON javascript object notation
+    language agnostic data format
+    JSON.stringify(obj) convert JS -> string JSON 
+    JSON.parse(string) convert string JSON -> JS object
+
+javascript {name: Tim, age: 32}
+JSON: `{"name": "Tim", "age": 32}`
+//conversion from java object to javascript object thru JSON
+//FIXME GOOGLE MORE
+template literals
+    "Person age: "+person.age
+    `Person age: ${personage}`   ** "backtick" button left of 1
+                        *for the "`"
+
+    

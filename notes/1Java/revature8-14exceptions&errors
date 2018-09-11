@@ -1,0 +1,70 @@
+Exception: unwanted/unexpected event that could interrupt the program's running or compiling
+Error vs Exception:    <-----In this case "Error" is not same as a bug/or compile time "errors," it's more like a program running out of space or something
+
+Error would be unexpected events your application shouldn't try catching
+Exception would be unexpected events your application should catch and handle
+
+Within Exceptions, there are checked and unchecked exceptions
+Checked: The compiler will warn you about beforehand (on fancy IDEs you cant even compile)
+	eg. Giving a negative number to long long int
+		or if you're making a custom exception, giving a negative age
+
+Unchecked: The compiler will tell you after you run 
+	Unchecked because you're expected to not screw up these parts
+	eg. dividing by 0, accessing too far past the array (accessing null ptr), stack overflow errror
+
+IO Exception: This is an unexpected event that happens when the file in the app is 
+
+
+Exceptions and Errors
+
+			Throwable
+    /    				   \
+Error       				Exception
+cant reasonably				/			\
+handle					(checked)			RuntimeException(unchecked)
+(out of memory)						
+(stack overflow)
+
+
+Checked exception: Compiler tells u before u run that u gotta handle this in the code, like I/O exception, something that may be out of our crontrol as programmers
+
+Unchecked exception:
+	these are things that should be checked by coder prior to compiling
+	eg. arrays out of bounds, null pointer exception, ParsingException, Class Cast Exception, Dividing by 0
+
+
+
+=================================================================================
+Handling Exceptions
+	catch them using a try/catch block
+	add a throws clause to your method signature (that means you'll handle it later?? FIXME)
+
+
+Example doing Exceptions
+
+	try{
+		(code that could throw an exception)
+	}
+	catch((IOException/Exception e/ etc.)){    //make a hierarchy of exception 
+											//cuz will execute first exception
+		(what to do if exception is caught)	
+	}
+	catch(Exception E){
+
+	}
+
+Finally
+	executes whether or not the exception is thrown. If there's a finally, we don't need a Catch. so either try{}finally{} or try{}catch{} At least
+
+Exceptions arent errors (error in cs has different definition from just any kind of computer mistake/bug) like both are mistakes/bugs, but exception is like a mistake that you can catch in your code. while error is out of your hands, mistake like running out of memory, nothin u can catch and remedy?
+
+
+
+try([resource]){
+	//perform whatever we want with this resource
+
+} catch(Exception e){
+	
+}
+

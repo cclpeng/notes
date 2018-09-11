@@ -1,0 +1,124 @@
+
+post() vs get()?
+	data parameterized in the message body instead vs in the url(get). 
+
+method siggy of doPost and doGet?
+	PROTECTED void doPost(HttpServletRequest request, HttpServletResponse response)
+
+some HTTPServer class methods?
+	doGet, doPut, doPost, doDelete
+
+what is deployment descriptor (D.D.)
+	determines proper servlet to send the requests to. Deployment descriptor is an xml file named web.xml. For spring: right click
+	 project, javaEE, configure deployment descriptor. Places in 
+	 WEB-INF directory(must be in there), and must be called web.xml
+
+Is XML case sensitive?
+	yes :O
+
+What is pojo
+	plain old java object
+
+what is web container
+	it's part of the web server that can interract with our servlet
+
+Go over Java Servlet life cycle
+	1. client prepares http request
+	2. create two pojos servlet request and servlet response
+	3. web containers consult the deployment descriptor for which 
+		servlet to send the request
+	4. container calls init() <- overwriteable
+	5. web container calls service() which processes
+		the client request <- overwritable
+	6. send request back to client
+	7. next calls to the servlet, web container calls service()
+	8. timeout orwhen web container shut down, destroy() called
+
+The types of Servlet request and response?
+	ServletRequest, ServletResponse
+==================================================================
+	1. Describe the Front Controller Design Pattern
+		Describes servlet cycle organization. Have a Master Servlet, 
+		acting as a front controller, that redirects requests to the 
+		correct servlet, based on the 
+		Deployment Descriptor. Oftentimes for cleaner, more organized
+		code, there is a RequestHelper to determine the correct 
+		servlet for the Master. Then Master just performs the redirect
+	2. Which servlet handles session management?
+		Master Servlet. Master Servlet handles all application-wide things like caching and session management
+	3. How do we have persistence with our servlets?
+		Session Management
+	4. What is session management
+		saving certain credential strings so that you can customize the web app for a specific user while the user is logged in, or before the session times out for that user.
+	5. What are 4 ways of providing session management?
+		Cookies, URL Rewriting, Hidden Form Fields, Session Object
+	6. Cookies
+		they are name pairs stored in the browser. Con is that the user can disable cookies, limiting the service side's control
+	7. URL Rewriting
+		changes the url to have information. Users can't disable it, which is nicer than cookies, but it exposes our information to users
+	8. Hidden Form Field
+		con is difficult to maintain. what it does is, it saves form information from request parameters and uses that to maintain
+		a certain state. 
+	9. Session Object
+		We create java object on the service side with the string being saved. Easier to maintain, complete control service side
+===================================================================
+What is angular?
+	Javascript Framework
+		Uses Html templates and Typescript
+Benefits of Angular?
+	Single Page Application, very responsive + fast. modular, strong data binding
+How does angular work?
+	The application is broken down into components, includng services. Components display html content, and the services provide functionality components in general can use
+Differences typescript and JS?
+	TS has more type safety than JS. If you do var:type, then that var must have type of "type", can set function return alues
+	function(): type {}
+
+Which html file in angular app has the full html elements?
+	index.html: <html>
+					<head>
+					<body>
+						<app-root>    <---- <app-root> would have
+											<app-component></app-component>
+											<app-component2>
+											<app-component3>
+
+https://alligator.io/angular/data-binding-angular/
+
+https://www.w3schools.com/angular/angular_databinding.asp
+
+https://www.codementor.io/adekunleoyaniyi/interpolation-vs-property-binding-in-angular2-eu1tzbyn4
+
+	1. what is one way data binding? how to do it?
+		Where the controller accesses the view and changes it. Changes in . how: use string interpolation
+		{{}} or property binding:[class]=dslfk. with prop binding,
+		dslfk is read into class. However, dslfk side can not access
+		or view class. It's one way only. 
+	2. what about 2 way data binding?
+		how: set by doing [attribute/property] = "variable"
+		Here the controller access the view and changes, but also users can change the view??
+		//FIXME
+
+	3. What is a directive
+		it's a custom html element. eg. the selectors we have for 
+		our components like <app-first> are directives
+
+	4. 3 kinds of directives?
+		components, structural (*ngFOr/if), attribute (*ngClass, *ngModel, *ngStyle)
+===============================================================
+	1. wat do we use import for in angular?
+		external modules
+	2. where do we register our custom pipes?
+		register with module, include in declarations
+	3. what is one way and two way databinding?
+		//fixme
+	4. What is a component? 
+		//fixme honestly dont rl know
+	4. how to generate new component in angular?
+		ng generate component components/name
+		ng g c components/name
+	5. what is a directive in angular
+		//fixme
+	6. how to create angular app?
+		ng new app_name
+		ng serve
+	7. what is property binding in html?

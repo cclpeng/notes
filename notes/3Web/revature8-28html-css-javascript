@@ -1,0 +1,70 @@
+HTML
+
+	Hyper text markup language
+		Used to define structure of a web page (where everything goes)
+		organized into elements with opening and closign tags
+
+		<!DOCTYPE html>
+		<html>
+			<head>
+				<title>My Page</title>
+			</head>
+			<body>
+				<img src ="file/location" />
+				<p></p>
+
+//FIXME GOOGLE THESE TWO, apparently similar
+				<div></div>   (block)
+
+				<span>        (inline)
+
+				<ol>		ordered list
+					<li>item1</li>
+					<li>item2</li>
+				</ol>
+
+				<ul>
+				</ul>
+
+				<h1>text</h1>  //headers h6 much smaller
+
+				<a href = "url">link text</a>//links
+
+			</body>
+
+		</html>
+
+	CSS
+		Cascade style Sheets
+			3 ways to include css:
+				1. external style sheet
+					html 					css
+					//link css
+					<a rel = "stylesheet"  	
+						href="___.css">		p {
+					<body> 			 	 	background-color: 
+						<p>Hello all</p>		blue;
+					</body> 				}
+				2. inline css
+					<body>
+						<p>Hello all</p>
+						<p style="bckgrdcolor = green">Hey</p>
+					</body
+				3. internal styling (style tag)
+					<style>
+					</style>
+
+					<body>
+					</body>
+			Precedence: Internal Styling, Inline Styling, External Style. If you make something green, blue, yellow in internal styling, inline, external, then the thing will be green only
+
+			//this "id" is unique identifier!!
+			<p id="first" class="myclass">Cat</p>
+			<p id="second" class="myclass">Dog</p>
+			Classes can let us do consistent styling
+			ID can let us target just one specific thing
+			Format: Under CSS for this,
+				#first{ style }
+				#second{  }
+				#third{  }
+				.myclass{  }

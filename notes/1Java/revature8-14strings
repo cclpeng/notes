@@ -1,0 +1,34 @@
+Strings
+immutable sequence of characters
+
+y strings immutable?
+		their value is the location not the value? FIXME ask on slack why again are not immutable?
+
+String pool
+	allocation in heap memory where strings are stored
+	for more efficient memory management
+		Like if we have made many strings with "star", why make a bunch of memories of "star?"
+		just place "star" once and all variables v=with value "star" will point to one location
+
+		eg.													String Pool:
+			String s1 = "dog"  -----creates in pool---->   1.   "dog"
+			String s2 = "cat"  -----creates------------>   2.   "cat"
+			String s3 = "dog"  -----> 1.
+			String s4 = "cat"  -----> 2.
+			String s4 = "cat"  -----creates------------>   3.	"cat!"
+
+
+			s3 == s5  		=> false
+			s3.equals(s5) 	=> true
+			
+	How do I make new string, but I don't make all of it in memory, just allocate nonpermanently??
+			new String("dog"); Just use new. 
+			Intern returns a string w a reference in the string pool (sp)
+
+Want a mutable sequence of characters? what to do
+		string builder or string buffer. objects that behave like strings, but have mutable sequences
+		Use if we will change the string a lot, because if we have to add a lot of different strings,
+			wouldnt be efficient, defeating purpose of string pool
+		Both have same functions: Append, reverse, insert, 
+		String Buffer's methods are synchronized, making it thread safe, while builder not thread safe
+			although bcuz synchronized, a bit slower than builder

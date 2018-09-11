@@ -1,0 +1,161 @@
+servlet API dependency in POM
+
+	HTTP Request
+		HTTP method
+		header request
+		body request (body)
+		HTTP version
+		url
+	(GET)
+	Base url[]?name=Tom&age=45
+		gets data parameterized in url
+	(POST)
+		parameters in the request body. better for passing secure information because it has access to request body send 
+		parameters, but it wont sho up in the url
+	(PUT) updating a resource
+	DELETE removing a resource
+	HEAD    
+	TRACE     } all these 3 are metadata related
+	OPTIONS
+
+Servlets
+	java classes which can handle http requests and prepare responses
+
+	Servlet(interface)
+		GenericServlet (abstract class)
+			HttpServlet (abstract class)
+				OurServlets
+					input handler methods: java methods which handle particular HTTP methods
+						doGet
+						doPost
+						doDelete
+//FIXME above, what are those 
+	Diagram
+		Client 				Server: Web Container (Tom Cat)
+		1. -------http--------> 
+						  2.|Web.xml   Deployment Descriptor
+							|		   3. \|   
+							|			   \  
+							|			   |v 
+		  					|/a servletA   |	/b servletB
+
+	1. client prepares/sends HTTP Request
+	2. pojos are created as ServletRequest & Servlet Response
+	  		*pojo: plain old java object (the java XML HTTP req)	
+	3. Web container consults deployment descriptor (something we 	
+		make and define)to determine appropriate servlet to send the 
+		request to. 
+	4. Container instantiates our servlet & calls init() initial serv
+	5. Container calls service() to route the request to the 
+		correct handler to process the response
+	6. Response will be sent back to the client	
+	7. any consecutive call to that specific servlet should call
+		service() again
+	8. after a timeout or when the web container is shut down, the
+		destroy() method will be called.
+Servlet LifeCycle
+	1. init() called once
+	2. service() called once for every request
+	3. destroy() called once. destroys entire servlet
+
+Deployment Descriptor
+	Web.xml:
+
+	<web-app>
+		//first declare servlet
+		/* **Servlet Context goes here */
+		<servlet>
+			<servlet-name>My Servlet</servlet-name> //name
+			<servlet-class>com.revature.ServletA</servlet-class> 
+			/* **Servlet Config goes here */
+		</servlet>
+
+		<servlet mapping>
+			<servlet-name>My Servlet</servlet-name> //same as above
+			<url-pattern> /a </url-pattern>  //like in diagram
+		</servlet mapping>
+
+	<web-app>
+
+Servlet Context
+	Put this markup text Inside <web-app>. So <servlet> and <context-
+		param> are siblings, with <web-app> parent  ^^^
+	parameters we want to define, which all servlets can access
+		<context-param>
+			<param-name>FavoriteColor</param-name>
+
+			<param-value>Blue</param-value>
+		</context-param>
+
+Servlet Config: providing parameters for a specific servlet
+	Child of our <server> tag
+		<init-param>
+			<param-name>message</param-name>
+			<param-value>Hello!</param-value>
+		</init-param>
+
+
+
+	//converts our servletRequest/Response to HTTPServletRequest/Resp
+	public void service(ServletRequest request, ServletResponse 
+		response) throws ServletException, IOException
+			//would throw IO exception cuz 
+	{
+
+	} //called by Web COntainer on our servlet
+
+//THIS IS DIFFERENT FROM ABOVE. lookat parameteers
+	public void service(HTTPServletRequest request,
+						HTTPServletResponse response) throws
+						ServletException, IOException
+		//disptch our req/resp pair to appropriate handler method
+			//based on the type of HTTP request:
+			//GET, POST, PUT, DELETE, TRACE, PATCH, HEAD, OPTIONS
+
+	protected void doGet(HTTPServiceRequest request, Ht... response)
+				   doPost( same signature :) )
+				   ... 
+				   ...
+		//forward to another resource
+		//redirect to another resource
+		//get request parameters
+		//use printwriter from our response obj
+			//to rtn a message (or some html (html for a msg if u 
+				//want it to render...))
+//FIXME line above
+
+
+
+
+	//Now we make a servlet with TomCat
+
+
+
+	//back to notes
+
+Two ways to Move Through Resources: Forward and Redirect
+			Happens Behind the Scenes!!
+	Forwarding:
+	client 	--/a-->	Web Containers
+			<-/a---	ServletA    ServletB        DD
+			1.		fwd:/b   -->                /a => ServletA
+												/b => ServletB
+	1.	Client sends a request to /a which is directed to servlet A
+		Servlet A forwards request to /b
+		Servlet B processes the request with the same request/response
+			pair
+		client receivesa response from /a
+
+	Redirect:
+	client    --/a-->  |WebContainer
+			 <--/a---  |
+			 	300s   |	
+ 			status code|
+			 		   |Serv.A 		ServeletB
+			-->/b----> |Redirect
+			<---/b---  |/b /  ----> ResponseObjects ???????FIXME
+				 |	   |  /
+				 v       /
+			URL change  v
+			Fresh Request/response pair
+

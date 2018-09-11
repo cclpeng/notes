@@ -1,0 +1,38 @@
+=
++=
+-=
+*=
+
+i++ vs ++i??
+	i++: access i, i = i+1;
+	++i: i = i+1;, access i
+
+.equals -> checks for value
+	override it to make it meaningful
+
+bitwise and logical operators
+	logical: &, |, &&, ||
+		& and |: Looks at variables bit by bit.
+			eg: false & true -> false. 
+				false&&true -> false(but "true" never looked at since false already false)
+		&& and ||: must be booleans
+
+Ternary operator
+	boolean amICool = true;
+	boolean amIStillCool = amICool ? (print Yes!) : (print Noo! :( );
+	* you can do multiple statemetns, just do "," and parenthesis --> ____ ? (a=3, c=4) : (a = 0, c = 0);
+
+Flow adn Control
+	if/else
+	switch
+		eg. switch(i){
+			case 1: 
+				say winner;
+				break;    <---- break important
+			case 2: 
+				say loser;
+				break;
+		}
+	loops, foreach
+		foreach loop ex: for(int i: arr){print i} assuming the arr is an int array, then i is an item of arr
+	try/catch eg. exception

@@ -1,0 +1,169 @@
+
+Multiplicity Relationships
+	amount of records on either side of the relationship we gotta consider. Like employee to locations, the employyee can only be at one location, but location can have many employees. it's a employee: location ==> many: 1 relationship
+
+	One to one - principle : school
+	One to many - school : students
+				  doctor : patients
+	Many to one - patient : doctor
+	 			  students : school
+	Many to many - students : courses
+
+	1:1 ==> just 1 table of principles and schools, 2 cols
+	1:M or M: 1 ==> 2 tables, Many side will reference one
+					like school: student. Student's school column
+					can only be one of the existing schools in table
+	What about M:M???
+		Create Junction table. Intermediary table! Concatenating
+		eg. pk	Student 	 pk  Course
+		    1	Mary          1  Art
+		    2	Joe           2  History
+		    3	Bob           3  Math
+		        \				/
+		        pk_student		pk_course
+		        	1				2		//Mary: history and Math
+		        	1				3
+		        	2				1		//Joe: art and math
+		        	2				3
+		        	3				2		//Bob: history
+		Doing this saves space 
+//FIXME HOW AGAIN? IM NOT COMPLETELY SURE. GOOGLEEE
+
+
+Joins
+	Queries which span across more than a table
+	generally we make a join predicate which matches common columns 	in the tables weve been joining
+	Types of joins: 
+		Inner, Outer(Full), Left, Right, Self, Cross, Natural
+
+
+		employees 				Department
+			name   d_id			d_id   name
+			paul    4       	1 		it
+			lisa    2  			2 		hr
+			grey    2 			3 		legal
+			sally   1 			4 		sales
+			larry   null
+
+		(INNER) JOIN 	//as name       //as department
+			SELECT EMPLOYEE.NAME, DEPARTMENT.NAME 	
+			FROM EMPLOYEE                 //lists by employee
+			INNER JOIN DEPARTMENT    //and department's like value
+			ON EMPLOYEE.D_ID = DEPARTMENT.D_ID 	  //and dont forget on
+											//what column to base join on
+			Result
+				NAME    DEPARTMENT    //this is from aliasing
+				PAUL 	SALES
+				LISA 	HR
+				GREY 	HR
+				SALLY 	IT
+				//note: it doesn't do Larry. linked key area is null, 
+				//no include
+		FULL (OUTER) JOIN
+			Includes info from both tables in each record
+			Include every record from each table
+			Fills in unmatched values with null
+
+			SELECT EMPLOYEE.NAME AS NAME, D.NAME AS DEPARTMENT
+			FROM EMPLOYEE AS E        //"as e" lets us do on E.D_ID 
+			FULL JOIN DEPARTMENT AS D 
+			ON E.D_ID = D.D_ID
+
+			Result
+				DEPARTMENT 		NAME
+				SALES 			PAUL 
+				HR 				LISA 
+				HR 				GREY
+				IT 				SALLY 
+				NULL 			LARRY  //these last two are different
+				LARRY 			NULL   //extra
+
+		LEFT(OUTER) JOIN
+			returns table of everything from left table along with
+				matches on the right
+
+			SELECT D.NAME AS DEPARTMENT, E.NAME AS EMPLOYEE
+			FROM EMPLOYEE //we want employee as "left" table
+			LEFT JOIN D
+			ON D.D_ID = E.D_ID
+
+			Result 
+				DEPARTMENT 		NAME
+				SALES 			PAUL 
+				HR 				LISA 
+				HR 				GREY
+				IT 				SALLY 
+				NULL 			LARRY 
+
+		RIGHT (OUTER) JOIN
+			SELECT E.D_ID, D.D_ID 		//NOTE: can get the same
+			FROM EMployEes 				//below table by doing
+			RIGHT JOIN DEPARTMENT 		// select __ from DEPARTM
+			ON D.D_ID = E.D_ID          // left join EMPLOYEE
+										// on ____
+			Result
+				DEPARTMENT 		NAME
+				SALES 			PAUL 
+				HR 				LISA 
+				HR 				GREY
+				IT 				SALLY 
+				LEGAL 			NULL 
+		CROSS JOIN
+			gives us EVERY possible combination: 
+				IT with paul, lisa, grey, sally, larry
+				HR with paul, lisa, grey, sally, larry, etc
+
+			on tables:
+				employees 				Department
+				name   d_id	  m_id		d_id   name
+				paul    4     null  	1 		it
+				lisa    2  	  null		2 		hr
+				grey    2 	  1			3 		legal
+				sally   1 	  null		4 		sales
+				larry   null  5
+//FIXME Missed Self join and Natural join
+								//natural: no duplicated common cols
+								//like it just lists a table
+								//with all the columns
+			//eg. t1: a, b, c, d.   t2: e,f,a,g
+			//then the returned table for natural join is
+			//t3: a, b, c, d, e, f, g
+			//while inner join is
+			//t4: a, b, c, d, e, f, a, g
+
+
+Set Operators - Operators which work on 2 queries, which need to
+				have the same columns and data types.
+	union		& union all
+	minus
+	intersects
+
+		eg.	UNION 					    UNION ALL
+		query1 	query2            query1    query2
+		combination of all,         combination of all
+		no duplicates	            duplicatees, too
+
+		eg. MINUS 						INTERSECTS
+		Query1  Query2  			
+		happy   happy				 
+		usurp   tiger 				==> happy, usurp, b
+		a  		acer 					==> table of query1 and
+		b 		subl 					==> query2. Same results
+		c 		b
+		d 		usurp
+
+		==> a, c, d
+			==> table items of query1
+			==> minus table items of 2.
+
+
+
+
+QUIZ:
+	whatare the different set operators?
+		union, union all, intersects, minus
+
+
+
+
+			

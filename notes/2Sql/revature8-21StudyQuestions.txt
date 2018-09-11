@@ -1,0 +1,75 @@
+RDMS?
+		Relational Database Management system
+		Collection of tables, stores data in columns/rows
+		Allows us to store, delete, change, retrieve data, and manage its security
+DDL		
+		Part of what allows us to store and delete
+		Data Definition Language
+		Defining table's name, and column names/ types
+		Alter belongs to this, and it can only change structures
+			that are part of the table. table and columns
+
+DML
+		Data Manipulation Language
+		Part of what allows us to store, delete, retrieve data
+		Store  C - INSERT TO
+		Read   R - SELECT				<=== actually part of DQL?
+		Update U - UPDATE
+		Delete D - DELETE FROM
+
+TCL
+		Transaction Control Language
+
+What's a constraint? what sublang?
+		A restriction put on the values of the column the constraint is put on. eg. This column's values may not be null. Part of
+		DDL
+Name some constraints
+		Not NULL, DEFAULT, CHECK, PRIMARY KEY, FOREIGN KEY
+Whats a transaction
+		A group of operations to be 
+What sublanguage does function TRUNCATE and DROP belong to?
+		DDL
+What sublanguage does COMMIT belong to? What does it do?
+		TCL, It saves permanently data to the database. It helps
+		provide durability to the database because once it's committed, ROLLBACK can not roll back to a previous version
+		of the data anymore.
+What sublanguage does function SELECT belong to?
+		Data Query Language, dql
+What sublanguage does ALTER belong to?
+		DDL
+What sublanguage does RollBack belong to? WHat is?
+		TCL 
+What sublanguage does CREATE belong to?
+		DDL
+What sublanguage does SAVEPOINT belong to? Wat is?
+		TCL, it sets the point roll back will go back to, if we don't want to go alll the way back to previous commit
+What sublang does REVOKE belong to? what is it?
+		DCL, Data Control Langu. Removes Permissions from users
+What sublang do constraints belong to?
+		DDL
+What are the properties of the TCL? What they mean?
+		ACID acronym. Atomicity, Consistency, Isolation, Durability
+		A: If one part of transaction fails, whole trans fails
+		C: Maintains consistency of the data, make sure status and 
+		   types are all still same
+		I: Describes transactions. Transactions are isolated from each
+		   other, independent of each other, so if one fails, the 
+		   other one can still work
+		D: While the other three describe adding new material. 			Durability describes maintaining past information.
+			Commit is a point that we cant go back from. Can control
+			where you can and cant go back to,
+What is GRANT, and what sublang?
+		Data Control Language, and it grants user permissions
+What are some methods in TCL that provide Durability?
+		Commit, SAVEPOINT, ROLLBACK
+
+
+What is Domain Integrity? Relational Integrity?
+What is SQL?
+Difference between Truncate and Drop?
+Scalar and Aggregate function
+Where vs Having
+
+
+
+

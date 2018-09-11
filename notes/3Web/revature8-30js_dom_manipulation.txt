@@ -1,0 +1,47 @@
+JS and DOM manipulation
+
+    Dom: Document Object Model
+        representation of our hmtl file. A tree of JS nodes
+        which represent that
+        Hierarchy
+            Window -> document ->head
+                               ->body -> div -> p, img
+    Accessing elements in the dom
+        document.getElementById("nameInput");
+        document.getElementByClassName("inputClass");
+        document.getElementByTagName("div"); //gives collection
+        [element].innerHTML
+        [element].setAttribute("src", "url.com");
+        [element].style -> [element].[attribute]
+
+        can access related nodes
+            [element].parentNode
+            [element].childrenNodes
+            [element].firstChild, .nextSibling, etc.
+
+    Events
+        occurrences on client side which we handle programmatically
+            on key up, on mouseover, on mouseclick, etc.
+            onclick
+            onmouse
+            onkeyup
+            onkeypress
+
+        <button onclick="myfunc()">Click me!</buttom>
+        //not the best way to do it tho
+
+        //2. setting an event property
+        [element]onclick = function(num){ behavior }
+        document.getElementById("b1").onclick = //function
+
+        //4. add an event listener
+        [element].addEventListener("click", myFunc);
+        //  3rd optional arg is useCapture
+            //used to handle event propagation
+
+            div -> div -> img
+            click capturing, means click div and goes down to image
+            click bubble means click img and go up to div
+            Capturing takes precedence
+            
+

@@ -1,0 +1,20 @@
+why java?
+	platform independent from JVM
+	OOP
+	maturity + support available. used everywhere
+	automatic memory management (no delete)
+	free
+	compile and run time safety
+	
+JVM
+	what is platform independence?: 
+		Write it once, then able to run anywhere
+	jvm is platform dependent, then once device has, can run any java program
+	JDK: Java Development Kit: 
+		contains the compiler and JRE. Then JDK contains everything - jre, jvm
+	JRE: Java Runtime Environment: 
+		JRE in respect to JDK and JVM is a superset of JVM. The JVM plus any other libraries needed to run code
+	JVM-Java virtual machine: 
+		interprets compiled bytecode(machine language code)
+		what compiles the code is JDK	
+	

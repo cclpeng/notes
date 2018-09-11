@@ -1,0 +1,324 @@
+
+On github as "servletjdbc demo"
+For Project 1: combine JDBC and Java Servelt
+
+	1. pom file add packaging as war, deployment descriptor, java 
+		servlet, and jackson data-bind
+	2. in ConnectionUtil class, change getConnection() with new 
+		updates (see git hub)
+	3. make new package: com.revature.servlets
+		Instead of making a class, choose other, then choose servlet.
+		name will be something like EmployeeServlet as usual
+			Doing this will aslo auto make some things like our mapping, name in web.xml, doGet/doPut in servlet
+	4. 
+		in doGet, make an instance of our EmployeeDao
+			EmployeeDao ed = new EmployeeDaoImpl();
+			List<Employee> employees ed.getEmployees();
+			//Now we have a list. We can put a list in an ObjectMapper
+			//to create JSON strings we need.
+				//see github for actual example
+			employeeString= "{\"employees\":"+employeeString+"}";
+			//then printwriter to print our string.e
+				//Finished goal: looks like an api!! :D
+				//will print to our webpage json strings of employee 
+				//items from our database
+
+	5. Create new servlet under servlets pckg
+			Under doGet
+				RequestDispatcher rq = 	
+					request.getRequestDispatcher("Views/
+					Directory.html");
+				rq.forward(request, response);	
+		Create new script folder in the webapp folder (for html and js files)	
+			Under views folder, make directory for html 
+				localhost:8082/projectname/directory instead of home one
+	6. in directory.html, make it look nicer
+		//put bootstrap. gonna use for tables
+		//add table, class "table", id="table"
+			//headers: name, location, dep
+		//add ur js script at bottom of directory.html
+			<script type="text/javascipt" src= "Scripts/Directory.js">
+
+	7. in Scripts, add a new file Directory.js
+		//test console.log() to make sure everythings connected
+		Inside create a
+		func sendAjaxGet(url, func){
+			let xhr = XMLHttpRequest() || new ActiveXObject("micr..");
+			xhr.onreadystatechange = func(){
+				if(this.readyState===4 &&)
+					func(this);
+			}
+			xhr.open("GET", url);
+			xhr.send();
+		}
+
+		//now call
+		sendAjaxGet("http://localhost:8082/ServletJDBCDemo/employee", display);
+
+		//now make display function
+		function display(xhr){
+			//this will make in the console, lines/rows of 
+			//wat will go in our table :D
+			//
+			employees = JSON.parse(xhr.responseText);
+			//console.log(employees);  //testing! see above comments
+			employeeArr = employees.employees;
+
+			//add this data into our html table :D
+			for(i in employeeArr){
+				let newRow = document.createElement("tr");
+					//use string interpolation next lines below
+				newRow.innerHTML = `<td>${employeeArr[i].name}</td> 
+					<td>${arr[i].location.city}</td> 
+					<td>${....department.name}</td> `;
+				table.appendChild(newRow);
+			}
+			//THIS WONT WORK THO! BECAUE SOMETIMES NULL VALUE
+			//add if checks in the for loop. set these to variables
+				//if...name exists, save into variable, else
+				//variable is "n/a";
+				//at end, before for loop ending }, add newRow w/ variables 
+		}
+
+
+
+
+	//after going through #8, notice that getParameter() returns
+	//a string. From that string, we can use it to compare to
+	//existing java object/database obj, or use to create new java 
+	//object and put it in our database :D
+	8. New topic: how do we get url's parameters when we use doget?
+		well in doGet() from EmployeeServlet, 
+			add in the beginning, 
+			String = request.getParameter("id"); //"id" was
+				//the table's id. Request has the url parameters
+			Sysout(string);   //testing: teaches that... see ln below
+				//if nothing in url, no id=?4, then id is null
+			if(idStr != null){
+				int id = Integer.parseInt(idStr);
+					//getEmployeeById means search/grab emp w/ ID
+				Employee e = ed.getEmployeeById(idStr); //impl l8r
+				String employeeString = om.writeValueAsString(e);
+				pw.write(employeeString);
+			}
+
+			//else, we want to just get a list of all our employees
+			//and just print everything. (copy wat we used to have)
+			//so this change just means, if there was a param
+			//get specific employee, otherwise do wat we have been
+			//doing
+	9.
+		Add a new method getEmployeeById() also in EmployeeServlet
+		public Employee getEmployeeById(int id)
+		{
+			Employee e = null;
+			String sql = "SELECT * FROM EMPLOYEE WHERE EMP_ID = ?";
+			//Now copy some of getEmployees list function, just
+			//edit a bit. See github
+				//eg. change from Statement to Prepared S to be 
+				//wary of sql injection during the search
+		}
+
+
+	10. New TOpic! Master Servlet
+		Creatae new servlet, call it MasterServlet
+			in doGet() add method:
+				request.getRequestDispatcher("Views/Home.html").
+					forward(request, response);
+		Now in Views folder, add your Home.html 
+		In home.html
+			make title Landing Page
+			add form in body
+				select name="destination"
+					option vale="employees" Employees //go to these 
+								//places
+					option value="directory" Directory
+				input type="submit" value="take me there!"
+			How to send this action to Servlet??
+			change form to 
+			form action="home" method="post"
+
+		Back in MastersServlet
+			test: print to console option we're getting.
+			inside doPost(), add this:
+				sysout(request.getParameter("destination"));
+		BUT this doesnt take us to the page.
+		WHAT WE NEED is a Redirect
+			Again in doPost()
+				switch(request.getParm("dest")){
+				case "directory":
+					response.sendRedirect("directory"); break;
+				case "employees":
+					response.sendRedirect("employees"); break;
+				default:
+					response.sendRedirect("home"); 
+				}
+		To Test:
+			to local:...dfs/[project]/home. Enter option
+			Should take us to the /home or /employee/directory page
+
+		Instead of taking to eployee page, y dont we have employee
+		option take us to place to create a new employee?
+			change case "employees" to
+				case "new":
+			Add new Servlet, where we'll forward the new pg
+				NewEmployeeServlet: url mapping is /new
+			Back to case "new"
+				do sendRedirect("new") instead of "employee"
+				ALSO the option in html has value="new" now :)
+			In NewEmployeeServlet
+				doGet()
+					request.getRequestDispatcher("Views/CreateEmployee.html").forward(request, response);
+			Make the Cre..Emp.html file in Views
+				title= Add a New Employee
+				body:
+					test: create new page
+
+	New TOpic: Request Helper!
+		We have too much logic in this (with the switch sttments)
+		In com.revature.util Package, make a RequestHelper class
+		We can do the logic in this class instead, and make it rtn
+			the correct thing.
+			Then the main Servlet will take what request helper
+			returns and do the Redirect with it :)
+
+		In RequestHelper
+			public static String process(HttpServletRequest request)
+				switch(request.getParameter("destination"))
+				case "directory"
+					return "directory"
+				case "new"
+					return "new"
+				default:
+					return "home"
+
+		Now back in doPost of MasterServlet. CHange switch to:
+			String destination = RequestHelper.process(request);
+			response.sendRedirect(destination);
+
+
+
+Exercise!
+	Use ur CreateEmployee html (line 166)to actually create a new employee.
+		I rememer we have CreateEmployee.html and NewEmployeeServlet
+		In CreateEmployee.html
+		<body>
+			//ALternate way instead of form is use AJAX request
+			<form action = "new" method="post">
+				<label>Name:</label> <br>
+				<input type = "text" name="emp_name"> <br><br>
+				<label>Email:</label> <br>
+				<input type = "text" name="emp_email"> <br><br>
+	//ADDED THIS	<label>Location:</label> <br>
+				//lets do a select so we dont have to check input
+				<select name="emp_location" >
+					<option value="1">Reston, VA</option>
+					<option value="2">New Orleans, LA</option>
+					<option value="3">San Francisco, CA</option>
+					<option value="1">New York, NY</option>
+				</select> <br>
+				<label>Deparment</label>
+				<select name="emp_department">
+					<option value="1">Marketing<option>
+					<option value="2">Accounting<option>
+					<option value="5">Legal<option>
+					<option value="6">Customer<option>
+					<option value="7">Advertising<option>
+					<option value="8">Another Dept<option>
+					<option value="9">Janitorial<option>
+				</select>
+	//END OF ADDING
+				<input type = "submit" value = "createEmployee!">
+			</form>
+		</body>
+
+		Now in NewEmployeeServlet, we already have doGet() kind of done
+		now fill doPost():   //** FOR HINTS, see #8
+			String name = request.getParameter("emp_name");
+			String email = request.getParameter("emp_email");
+			//for the selects, you will get a number because
+			// the "value" is a number 1->5
+			int locationID = Integer.parse(
+						request.getParameter("emp_location"));
+			int depID = Integer.parse(
+						request.getParameter("emp_dept"));
+			
+			//create the java obj w/ correct vars
+			Employee newGuy = new Employee(name, email, 
+							locationID, depID);	 //BTW this is
+								//not even right lol 
+
+	//NOTES: SO U PROBABLY WANT TO INSTEAD DO NEW EPLOYEE() EMPTY
+			//CUZ U MGIHT NOT HAVE ENOUGH PARAMS. THEN SUPER() WILL
+			//AT LEAST MAKE EVERYTHING HAVE DEFAULT.
+			//SO MAKE NEW EMPLOYEE(). 
+			//THEN CALL newGuy.set____(name);
+			//ALSO BCUZ UR EMPLOYEE OBJECT HAS OTHER OBJECTS
+			//LOCATION and DEPARTMENT as its members
+			//MUST ALSO MAKE EMPTY new Location();
+			// AND SET THE LOCATION: loc.setId()
+			//MAKE EMPTY new Department(); and dep.setID()
+			//THEN DO newGuy.setDepartment(dep);
+			//		  newGuy.setLocation(loc);
+
+			//create a DAO
+			EmployeeDao e = new EmployeeDaoImpl();
+			//use DAO to insert to database
+			e.createEmployee( newGuy );
+
+
+	//FORGOT TO ADDD in the DAOImpl SO OUTSIDE OF SERVLET.JAVA
+	//GO EDIT YOUR createEmployee in DaoImpl
+		when we set our "?"s from our insert sql statement
+		we do ps.setString/Float(3, 	
+			employee.getDepartment().getId());
+			NOT 
+			employee.getDepId(). must getDepartment first, getting object, then use Department obj's getID.
+			getDepartment() will include name of department, etc
+		Same with location
+			employee.getLocation().getId()
+		This is because our Employee looks like
+			Employee{
+				string name
+				Location location // these are objects not like int
+								// loc_id
+				Department dep   //
+			}
+
+			So we must have in Employee class a 
+				public Department getDepartment() { return dep; }
+			and from there, call Department's getID(); 
+
+
+	//FINALLY: should have a service Layer: bridge between DAO
+		WHERE WE DO THE STRING VALIDATION SHIT. 
+
+
+NEW Topic:
+	clicking that submit should take us to a new page. we can make
+	an html:
+		<p>Employee added successfuly!</p>
+		<a href="new">Add another</a>
+	We will now create a SuccessServlet
+		in web.xml. The SuccessServlet should have TWO MAPPINGS :O
+			where name is success then success again...
+			GO SEE GITHUB
+	Now Make ErrorServlet :O   (we need an error and success pg)
+		in doGet()
+			//forward to our html
+			request.getRequestDispatcher("Views/Error.html");
+	In SuccessServlet
+		in doGet()
+			request.getRequestDispatcher("Views/Success.html");
+	To Test these two things. enter on google
+		local.../[project]/success
+		local.../[project]/error
+
+	NOW: back to the DaoImpl.java
+		when we do e.createEmployee(newGuy);, save its return val
+		int numCreated = ...
+		Do: (also in DaoImpl.java, right after)
+			if(numCreated == 1)
+				response.sendRedirect("success");
+			else
+				response.sendRedirect("error");

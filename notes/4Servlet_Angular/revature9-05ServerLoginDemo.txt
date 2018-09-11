@@ -1,0 +1,164 @@
+
+1. New Maven Project:
+	groupid:    com.revature
+	artifactid: ServerLoginDemo
+2. pom.xml: 
+	package as war
+	add 1.8 compiler
+	add javax servlet
+3. update maven project and
+   Java ee tools -> add Deployment Descriptor
+4. Goal: Make a login page, make profiles for people.
+	Don't want to be able to access profile unless logged in.
+
+5. make a few servlets in a new package: com.revature.servlets
+	 LoginServlet
+	 ProfileServlet
+6. in LoginServlet
+	in doGet() add
+		//forward to our login page
+		request.getRequestDispatcher("Login.html").forward(request, 
+			response);
+7. Create new Login.html in webapp directory (before WEB-INF)
+		<h4>Please enter your information</h4>
+		<form action="Login" method="post">
+			<label>Username:</label>
+			<input type="text" name="username"> <br><br>
+			<label>Password:</label>
+	//input type can be "password"
+			<input type="password" name="password"> <br><br>
+			<input type="submit" value="Login"> 
+		</form>
+
+8. add new Server. Make sure to add the correct server matching
+	your project and start it. 
+		Go to http://localhost:8082/ServerLoginDemo/login
+		*the login part came when we create our servlets.
+		*if we create through new Servlet, then itll auto gen for us
+		*so gonna check have to
+9. in LoginServlet
+	in doPost() add
+		String user = request.getParameter("username");
+		String pass = request.getParameter("password");
+
+		//Make a session :O here is notation
+		HttpSession session = request.getSession();
+		//for more simplicity, just hardcoding the credentials
+		//usually would go to
+		if(user.equals("admin") && pass.equals("pass123"))
+		{
+			//here our session object is saving credential for later :D
+			session.setAttribute("username", user);
+			//and then redirect us to our profile
+			response.sendRedirect("Profile");
+		}
+		else //wrong, so send redirect
+			response.sendRedirect("login");
+
+10. Go now to ProfileServlet
+	doGet()
+		//now that we have our session set from LoginS, we should 
+		//retrieve it
+		HttpSession session = request.getSession(false); 
+			//make false so that no session is made :D
+		if(session = null 		//if no one logs in, this happens
+			&& session.getAttribute("username") != null)
+			request.getRequestDispatcher("Profile.html").forward
+				(request, response);
+		else
+			response.sendRedirect("login");
+
+11. Profile.html
+	<body>
+		<p>Profile Page</p>
+	</body>
+			Ok, now restart server and test :)
+				try incorrect (should take back to login)
+				try correct (should take to profile pg)
+				try copy the profile page url and post into 
+					incognito browser...bcuz session not open
+					there, will take us to login pg :DDD
+				try .../Profile.html instead
+					will take us to profile :((
+12. How to prevent??? the line above?
+		LOL I MISSED IT FIXME FIXME
+13. Create new servlet SessionServlet: 
+	make urlpath "/session", and create!
+		This is going to be a way we can look at a page that prints
+		wat is stored in session
+14. Session Servlet doGet()
+		//dont make a new session if not working
+		HttpSession session = request.getSession(false);
+		PrintWriter pw = response.getWriter();
+			//this part, idk...it's new. it's so u format
+			//response to JSON string i think
+		response.setContentType("application/json");
+		if(session != null)
+			pw.write("{\"username\":\""+session.getAttribute
+				("username") + "\"}");
+		else
+			pw.write( "{\"username\": null}" );
+
+		pw.close(); 	//close it
+
+15. Create in webapp, make JS source file called CheckSession.js
+	CheckSession.js:
+		let checkSession = 
+			"http://localhost:8082/ServletLoginDemo/session";
+
+		function sendAjaxGet(url, func){
+			let xhr = new XMLHttpRequest() || new ActiveXObject(
+				"Microsoft.HttpRequest");
+
+			xhr.onreadystatechange = function(){
+				if(this.readyState===4 && this.status===200)
+					func(this);
+			}
+
+			xhr.open("GET", url);
+			xhr.send();
+		}
+
+		sendAjaxGet(checkSessionUrl, populateUser)
+
+16. Profile.html
+	add after <p> Profile Page</p>
+		<div id="user"></div>     <--Yes close it!
+	* Add the script CheckSession.js to bottom too
+
+17. Create the populateUser() in CheckSession.js
+	//this function will generate a page/display that's for the user
+
+	function populateUser(){
+		response = JSON.parse(xhr.response);
+		if(response.username != "null"){
+			document.getElementById("user").innerHTML = 
+				"You are logged in as: " + response.username; 
+		}
+		else //is null, link back to login
+			window.location = "http://localhost:8082/ServletLoginDemo/login";
+	}
+
+18. Let's destroy our session if we need. Make LogoutServlet.java
+	Now out of JS, back to java
+		inside doGet()
+		{
+			HttpSession session = request.getSession(false);
+			if(session != null)
+				session.invalidate();
+			PrintWriter pw = response.getWriter();
+			response.setContentType("text/html");
+			pw.write("<p> You have successfully been logged out<p>");
+			pw.close();
+		}
+
+19. Go back to Profile.html
+Add: 
+	add this line right after the div (not inside :O)
+	<a href="Logout">Log Out</a>  <--- this takes us to Logout Servlet to log us out :D
+
+	Test: Login, should show the link. CLick the link
+		Now enter website url to login, session is now closed
+		back to login page, not successful login page
+
+

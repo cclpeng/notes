@@ -1,0 +1,93 @@
+Lambdas   (->)
+	Anonymous methods using that arrow
+	often used in conjunction with Functional interface
+
+		()     ->          {}
+	parameters    body of our method
+
+	eg. (Object o1, Object o2) -> {}
+		(Question q1, Question q2) -> 
+			{return q1.getName() + q2.getName();}
+
+	Can use with foreach
+
+
+Singleton Design Pattern
+	assures only ever is one instance of a particular object
+		good for object, which, making more than one would be
+		unnecessary overhead and for which it isnt required
+
+	How do we make it so that constructor doesnt do new?
+		Make a private constructor
+		if Private, can't access?
+			Private constructors & a public method which can access 
+			an instance created within the class
+
+	Final step, override the clone method, so it can't be used to 
+		duplicate our singleton object
+
+Factory Design Pattern
+	Relying on a factory object to handle instantiating of an object. THen we dont need to instantiate ourselves in a main
+
+Maven
+	is a Build management tool
+	Mostly gonna be using to manage our dependencies
+		for now, but allows for us to configure our entire build lifecycle
+	Project Object Model, xml file where we define the configuration
+		of our application (dependencies packaging, etc)
+	Including our dependencies in our pom.xml will download them from
+		the maven repository and include them in our class path
+
+	You should learn to use Maven to create artifacts to make jar...
+		sometimes cant use the fancy ide to do everythng from maven u need. So far, our IDE has abstracted a lot of this stuff from 
+		us. it just works and we didnt have to do anything
+
+	War file: a file to do with web applications
+
+	Go to .m2 file
+	/home/sunny/.m2/repository/
+	or 
+	~/.m2/
+
+
+
+Junit
+	This is a unit testing framework.
+		Unit testing: running test cases. Modular testing. Take 1 test at a time
+			In this case, the unit is the method.
+	TDD.
+		Writing your unit test FIRST, then writing the code to have desired result of ur tests. Junit test enables TDD
+
+	Methods provided by Junit
+		assertions (compare expected value to actual outcome)
+			assertTrue, 
+			assertFalse, 
+			assertEquals
+
+	Annotation
+		@Test
+		can also use annot. to specify whihc tests to ignore
+		@Ignore
+		@Test(expect = [Exception])
+		@Test(timeout - [time])
+		@BeforeClass
+		@Before //before every test method
+		@After
+		@AfterClass
+
+Logging
+	log errors, exceptions. can save to a file and look back on your
+		result
+	Logging Levels, categorizing information
+		fatal		<----Highest priority
+		warn
+		info 		<----Info and above is worth knowing in Log
+		debug
+		trace		<----lowest priority
+
+
+
+
+
+
+

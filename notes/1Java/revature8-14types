@@ -1,0 +1,125 @@
+
+
+
+java is strongly typed, javascript is loosely typed.
+	strongly typed: must declare type when making variable. cant do x = 3, x = "too". 
+					can type cast, but must do (newtype) x;
+	loosely typed: 
+
+
+	primitive data types in Java 	default val		bit depth		Wrapper calss 
+		boolean						false			1    (0 or 1)	Boolean
+		short						0				16				Short
+		byte						0				8				Byte
+		char						\u000			16				Character
+		long						0				64				Long
+		int							0				32				Int
+		float						0.0				32				Float
+		double						0.0				64				Double
+	*"\u000" means null i think for chars
+
+	Naming conventions: using camelCase for methods, variables
+						using PascalCase for classes, interfaces
+						using ALL_CAPS for static, final variables (constants) AND enums :)
+						using com.revature.package (reverse url lowercase) FOR packages
+
+	bit depth: number of bits used to represent these
+		important because sometimes if u convert between these primitive types, because bits are longer or shorter, somtimes can be misrepresented after the conversion
+
+	wrapper calss:
+		class associated w primitive type, BUT WHY?? WHAT FOR?   FIXME
+		WHY DO WE USE WRAPPER CLASSES AGAIN???
+
+	Autoboxing:
+		putting it in the wrapper class, wrapping it. Implicit conversion from prim to wrapper class
+	Autounboxing:
+		Implicit conversion from wrapper to prim class
+
+
+
+============================================================================================
+now onto more complicated stuff about types
+Arrays
+	container of a single type set to a fixed size
+	can hold objects or primitive types
+	each element is accessed by index #
+	utility class for operating on array
+
+	how to declare array
+		int[] arr;
+		int arr[];
+
+	how to allocate space
+		arr = new int[4];	//essentially does [0, 0, 0, 0]
+
+	how to assign values
+		int[] arr = {1, 2, 3, 4};
+		arr[0] = 1;
+
+	how to print with loop
+		for(int num: arr)			// <==== for each loop
+		{
+			System.out.println(arr[num]);
+		}
+
+	how to declare and allocate 2d arry
+		int[][] arr = new int[4][4];		//essentially is [[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
+
+	Vararg?? variable arguments
+		public void printEach(type...varname)   <=== THIS THING is VARARG...GOOGLE L8R!!FIXME
+		public void printEach(int ... arr){     <=== the "arr" is the Varargs!!, last in params of signature
+			for(int i: arr)
+			{
+				println(i);
+			}
+		}
+		now if we do printEach(1);
+					 printEach(1,5,8,6);  --> now it will not matter if we have many variables as 
+					 arguments
+
+
+
+GAME:
+	& vs &&: first & can compare numbers as well as booleans and also short circuits FIXME WHAT IS SHORT CIRCUITING? && can only compare booleans
+
+	what does covariant mean?
+		something about polymorphism, being able to take a superclass or subclass and running ok FIXME
+	default method in interface
+		provides default implementation
+	abstract class vs interface
+		review lol FIXME
+	what is the entry pt of any java application, in terms of the java code we write?
+		no clue FIXME: Main method
+	overloading
+		same name, diff parameters
+	difference btw == and .equals
+		.equals must be overriden(not overloaded...still dunno difference FIXME). COMPARISON FOR VALUES
+		== compares memory btw two objects. COMPARISON FOR MEMORY
+	how can we override a method by chanign the throws clause in its method signature?
+		you need a covariant thing in the trhow...google FIXME
+	why is main method static?
+		if main method is instanced, you need a class associated with it, but since static, dont need one
+	different conditional statement?
+		if/else, switch, loops
+	datatypes not usable in switch statemnt
+		long, double, strings not usable in switch statement
+	java? wath is it?
+		jvm, jre, jdk
+
+	default val of bool var within block scope?
+		none, cuz block scope must be given defaults, lol trick qs
+	Access modifiers in java
+		protect: packagelvl and , default: package lvl LOOK AT NOTES FIXME
+		public: can import packages and then those packages can access the public item. Accross packgs
+	prim datatypes  
+		theres 8 of them: 
+	fall-through in switch statement?
+		if you forget to put break; then the case will just keep going
+	variable shadowing
+		two variables from 2 different scopes interacting
+	multiple inheritance? does java support?
+		lol idk FIXME look at notes
+
+
+
+

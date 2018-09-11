@@ -1,0 +1,209 @@
+What's RDBMS?
+	Relational database management system
+	A collection of tables which store our data, each with columns &
+		rows
+	Allows us to manage storage, retrieval, deletion, and security of
+		our data
+
+	Most common use is with CRUD operations
+							Create
+							 Read
+							  Update
+							   Delete
+	Referential Integrity
+		relationships between tables, the integrity is maintained
+			not allowing deletion of a record which other records 
+				reference
+			Child records are deleted when a parent record is deleted
+				Child becomes an orphan record
+
+	Domain Integrity
+		When we define each table, we need all of the domain's type 
+			is correct. Ensuring that all data is of the proper size 
+			and type. Aligns with our data type and any constraints 
+			defined
+
+	SQL?
+		Stuctured Query Language
+			How we perform our CRUD operations and interact with our 
+			database
+
+
+	//FIXME, google more
+	SQL Types?:			
+		No boolean!
+		text is called ===> varchar(#) # just means how many can be in
+		char()				These have variable length
+
+		nvarchar()   <==== with n, is unicode
+		nchar()
+
+		number(#digits, #digafterdecimal)  <=== 3.41 is number(1, 2)
+										<===== (5.2) max # is 99999.99
+		DATE
+		TIMESTAMP
+		"Lob"
+
+	Naming Conventions:
+		ALL_CAPS_W_UNDERSCORES. Even if we don't use uppercase, they will still be saved that way. so we use uppercase
+
+		
+
+	Dialects - PL/SQL: Procedural Language, Structured Query Language
+		Sublanguages: DDL, DML, TCL, DCL, DQL
+		*Mostly using DDL and DML (DQL is subset of DML)
+
+		//Defines the structure of our entities, like type of
+		//the columns of the table
+		DDL: Data Definition Language. 
+		keywords: 
+			CREATE [TABLE] (  
+				[COL_NAME] [COLUMN_TYPE]
+				[COL_NAME] [COLUMN_TYPE] 
+				...
+			)
+
+			//add column
+			ALTER [TBLE_NAME] 
+			ADD [COLUMN_NAME] [COL_TYPE]
+
+			//alter column
+			ALTER [TABLE]
+			ALTER [COLMN_NAME] [COL_TYPE]
+
+			//removes table and everything in it from memory
+			DROP TABLE [T]
+
+			//removes all data from a table. keeps table tho
+			TRUNCATE
+				TRUNCATE TABLE [TABLE_NAME]
+
+		//How we interact with the data in our db, perform		
+		//CRUD operations
+		DML - Data manipulation language
+			c. INSERT: allows us to add a specific record to our 
+						db
+					
+					Format: INSERT INTO [TABLE] VALUES ([VAL1], 
+						VAL2, [VAL3], VAL4) ;
+					Format: INSERT INTO [T] ([COL_A], [COL_B]) 
+						VALUES	([VAL_A], [VAL_B]) ;
+			u. UPDATE: changing a particular field or set in a 
+				preexisting record
+				
+				Format:  UPDATE [T] 
+						 SET [COL] = [VALUE]
+						 WHERE [CONDITION] ;
+					eg. UPDATE INVOICE
+						SET PRICE = 13
+						WHERE ID = 52 ;
+			d. DELETE: removes records from our db based on WHERE
+				
+				Format: DELETE FROM [T]
+						WHERE [CONDITION] 
+						//if not specified, does TRUNCATE 
+						//basically. Delete all values, but keep 
+						//table
+			r. SELECT: queries our db. returns a read operation
+			   and GROUP BY
+
+				Format: SELECT [COL_X][COL_Y] <== *: all col
+						FROM [T]
+						WHERE [CONDITION]
+//FIXME WHAT IS THIS??
+				//this is "Aggregate functions" 
+				Format: GROUP BY [COL]...
+						HAVING [CONDITION]
+						ORDER BY [COLUMN] ASCENDING/DESCENDING
+								*default Ascending
+
+	//so a Transaction is a list of operations you did within
+		//a "transaction," a period. Like when you go to bank,
+		//can make 5 deposits, 3 withdrawal, or just 1 withdraw.
+		//then you can finish, "complete transaction".
+		TCL: Transaction Control Language
+		Properties
+			Transaction: a unit of work on a database,
+						 0 to many operation grouped together
+			ACID properties of a transaction: 
+				Atomicity: if part of a transaction failed, entire 
+						transaction fails
+				Consistency: Operations are performed within the 
+							 preexisting
+						     constraints of our db. 
+						     (db valid state before and after 
+						     transaction)
+//FIXME a valid state...u mean type? or?
+				Isolation: Our transactions do not interfere with each 
+						   other, so performing them sequentially should 
+						   have the same result as performing them concurrently
+				Durability: commits are final, can't rollback from 
+				  			committed data
+				  		COMMIT: saves permanently our data to db
+				  		ROLLBACK: reverts back to the commit
+				  		SAVEPOINT: a pt where we rollback to, in our code
+				  				   if we don't want to revert completely
+				  				   to our most recent commit
+
+		//Lets us define user permissions on a database  
+		DCL: Data Control Language	  				   
+			GRANT  give permissions to a user
+			REVOKE remove permissions
+
+//This describes each Column.
+Constraints:
+	NOT NULL		//Each value of this column must have a value
+	UNIQUE			//Each value of that column must have diff val
+						//but doesnt mean NOT NULL
+	PRIMARY KEY     //each table we should make 1 prim key
+						//unique and not null
+						//we do this, the prim key, to uniquely 
+						//identify a record?
+	FOREIGN KEY     // defines relationships btw a table (eg. 
+						having a customer id column in our 
+						invoice tabl to reference the customer who
+						made the purchase)
+	CHECK 			// specifies a particular condition that values 
+						in a column must meet
+	DEFAULT         //provide a digit value for a column
+
+
+We can Write our own FUnctions: Two kinds
+Scalar Function?
+	//take discrete, user inputted arguments. like doing
+	//Square root. Given one, discrete, particular input to do
+	//calculation
+Aggregate Functions?
+	//calculates based on aggregate data, not particular values in //the data. Takes set of data, gives particular 
+	//result based on set
+	//Count, SUm, Average. Give it a Range of data. return 1 result
+
+Examples
+	Aggregate 					Scalar (string, date/time, numeric)
+		//MAX/MIN               	concat kind of function
+		//FIRST/LAST				today
+		//COUNT 					round, trig, 
+		//AVERAGE 					..
+	*Must use GROUP BY to 
+	 organize our aggregated 
+	 data & HAVING select which
+	 grps we will Display.
+	*WHERE vs HAVING
+	 Where will filter data set
+	 which we're gonna perform
+	 our aggregate
+	 HAVING requires an 
+	 aggregate & can only go 
+	 after a GROUP BY
+
+
+
+	DML not always committed by default< so remember to commit
+
+
+
+
+
+
+
+

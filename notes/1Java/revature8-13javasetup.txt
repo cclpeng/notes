@@ -1,0 +1,10 @@
+First install 3 things:
+	Git - and open Git Bash on your desktop
+	JDK 1.8
+	Spring took kit.... sts
+
+type environment variables in windows search
+on Advanced tab, click Environment Variables
+under System Variables, create new variable. call it JAVA_HOME, and variable value will be location of jdk eg. C:\user\java\jdk.version#
+Then under Path, an existing variable under System Variables, edit it, and add some new things: locations of jdk\bin and jre\bin under that
+	jdk.version# file

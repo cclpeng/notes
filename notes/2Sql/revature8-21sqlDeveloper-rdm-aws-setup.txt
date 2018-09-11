@@ -1,0 +1,38 @@
+ Connecting SQL Developer to an AWS Instance
+
+0.	Before you begin, you must have Oracle’s SQL Developer Installed on your computer. If you do not, download it here.
+<Linux Users>: Download Alien: sudo apt-get install alien
+                                     Convert rpm package to alien: sudo alien -i -k packagename.rpm
+                                     Alien is a converter that will reformat the rpm to debian, then you’re all clear to install regularly, (conversion and extraction will take a while).
+
+1.	Create an account with Amazon Web Services. This will require you to enter your credit card information for billing. However, we will only be using functionality on the free tier of AWS.
+
+2.	From the AWS Console, click on the Services tab on the nav bar and then on “Relational Database Service” under the “Database” header.  
+
+3.	Click on the Instances tab on the left hand nav bar and then on the “Launch DB instance” button. (While creating an instance, make sure to click “Only enable options eligible for RDS Free Usage Tier”-- this is important, you don’t want to get charged!)
+
+4.	Select “Oracle” for your engine, and “Oracle Enterprise Edition” Edition. Select “Dev/Test” for use case.
+
+5.	Keep the default DB details (this is also important -- selecting a larger size than db.t2.micro can charge you), name your database and create a username and password. Make sure to take note of these credentials.
+
+6.	Set “Public accessibility” in the advanced settings as “Yes”, leave the remaining advanced settings as their default, click launch database.
+
+7.	You will see that your instance is creating. It will take some time for the status to become available.    
+
+8.	When your instance’s status becomes available, you’ll have to modify the security groups for the instance. Click on the instance you created to see its configuration. Under the “Connect” settings are listed the security groups for your instance. Click on the security group with type “CIDR/IP -Inbound” to modify it. Edit the inbound rule, setting the source to anywhere. This allows all traffic to access your instance and will still allow you to access your DB when you change locations. 
+For more security, you could set the inbound security group to accommodate your current IP address and then also add your IP when you get home to be able to access it their
+Another note on security: When we start working with JDBC later this week, we will be configuring our database credentials into our applications. We will be doing this configuration in a separate file and you will want to make sure that this file is never uploaded to GitHub (or if it is, the credentials have been removed)
+
+Open SQL Developer. Click on the green plus on the Connections tab in order to add a new connection. You will be connecting to the SQL Developer hosted on your instance. Name your instance and put in your username and password credentials specified on AWS. Find your instance endpoint on AWS and set it to your connection Hostname. Leave port at 1521 and set SID to “ORCL”.  Clicking test should test your connection to the remote server hosted on RDS. After you’ve gotten a successful response testing the connection, click Connect. 
+
+
+
+chase is just revature usr/pw :-)
+
+Connection: I named it "RevatureSQL"
+Username: clpeng
+P/w: happiness4
+
+
+
+ 

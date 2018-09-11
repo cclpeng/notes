@@ -1,0 +1,55 @@
+Pillars of OOP
+
+Polymorphism: Flexibility to refer to java entities in different ways and take differnt forms
+	1. covariant types. eg. using superclass to refer to subclass
+		Fruit f1 = new Pear();
+	2. Method Overriding. not the same as overloading. Same method signature in parent/subclasses, but 
+	differnt implementation
+		eg. super class shape 
+				void area();
+			class square extends shape
+				void area(); 
+	3. Method Overloading: Methods with same name, different parameters and implementation. 
+		eg. public void add(int a, int b){//sum}, 
+		public void add(string a, string b){//concatenation}
+
+
+Inheritance: Subclasses adopt behavior from super classes (parent)
+	Matters cuz
+		code reusability and readability
+
+	eg. Library has many types of Items: books, vcr, cds
+		each item has ID #, return date, name. However, maybe books has other numbers VCR and CD no has 
+
+
+Encapsulation: use of access modifiers to control access to members of our class in order to protect 	
+	variables and accomplish data hiding
+
+	How to incorporate?
+		Variables private, Accessor methods public
+		Accessor methods include Getter and Setter methods. They will be public
+
+
+Abstraction
+	Using objects to simulate real objects so that user can just use the software but doesnt need any details about the actual implementation. in fact implementation is hidden from user. Real life abstraction is coffee machine. Makes coffee, but we cant see wat the machine is rly doing.
+
+	Abstract Classes
+		A. can't be instantiated because some methods fleshed out, some not, would be bad if stuff not 	
+			completely defined
+		B. subclass "extends" abstractclass. only one extends. cant extend 2 abstractclasses
+		C. must use the keyword abstract for each method to make the abstract class's method abstract
+		D. 
+		E. can be instanced variables
+			  Being
+		Robot		Person    <--- Diamond problem???
+			  Cyborg
+
+
+	Interfaces
+		A. can't be instantiated
+		B. subclass "implements" interface. a subclass can implement Many interfaces
+		C. methods are implicitly abstract
+		D. "default" keyword will make default behavior for a method in interface
+		E. implicitly public and static variables (static not instanced because there can be no 
+			instances of interfaces), implicitly final too. Public, Static, Final
+

@@ -1,0 +1,46 @@
+found in java.io packages
+
+Input streams/output sstreams read/write data
+
+Byte streams					Character Stream
+File Input stream 				File reader <--- goes 1 char at a time, so UseBuffers
+File Output stream 				File Writer <--- buffers are like line by line
+
+Buffered Byte stream 			Character Stream
+	buffered input Stream 			buffered reader		<-- like this. chunk by chun
+	buffered output stream 			buffered writer
+
+Serial version UID: when ur serializing something, need same ID in the serializing & deserializing Class. To make sure both classes have same ...things. It's like the ID for that particular object. Make sure the object you're sending and the object you're getting are still the same.
+
+Serialization is: process of converting object into byte stream
+	Can use an object input stream or output stream
+	used in conjunction with fileinputstream and fileoutputstream
+	the UID helps assure combatability btw serialized & deserialized class
+
+"Transient" keyword
+	assures a particular field isn't serialized	//FIXME WHEN DO U WANT THIS AGAIN?
+
+Final keyword
+	a variable can not be Reassigned
+
+Final method??
+	Can't be overridden by a subclass. The method is final in the superclass. 
+
+Final class
+	Can't be extended
+
+Finally
+	used in exceptions. looks like:
+	try{
+	} catch(){
+	} finally {
+	}
+	//what you put in finally will be code that runs after the try catch, no matter if it was caught or not. it's like Finally, do this
+
+Finalize
+	This is not something user calls. This is what Garbage collector calls to delete unfreed memory. You can suggest Gc collect though,
+	like finalize(), but that only suggests gc do it
+
+
+
+

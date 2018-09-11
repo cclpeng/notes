@@ -1,0 +1,45 @@
+transaction phenomena
+		problems that come up cuz of concurrent transactions
+	1. dirty road - a transaction which reads uncommitted data
+		eg. transaction a: adds 'ben franklin', 
+			transaction b: queries for everyone last name franklin
+						   26 ben franklin
+						   10 sally franklin
+			rollsback -    ben franklin is no longer valid data
+						   as it was in transaction b.
+			*transaction b was the one reading uncommitted data
+	2. nonrepeatable read - data in one transaction has changed in 
+		the duration or the transaction by another transaction
+		eg  transaction a: queries for first name sally
+							10 sally franklin
+							28 sally jones
+			transaction b: updates last name to "smith" where id = 10.
+			transaction a: queries for first name sally
+							10 sally smith
+							28 sally jones
+	3. Phantom read - if datas inserted or deleted during the 
+		duration of first transaction by another transaction
+		eg  transaction a: queries for classname "McCormick"
+							Paul    McCormick
+			transaction b: inserts in 59: "Lisa", "McCormick"
+			transaction a: queries for classname "McCormick"
+							Paul McCormick		
+							Lisa McCormick  <=== Phantom data lol
+			*note: transaction b happens during transaction a. and
+					though it says transaction a twice, it just means
+					transaction a keeps going, goes to next step
+
+
+						Isolation Levels
+	*X means option prevents these
+				  Dirty Read   Nonrepeatable Read   Phantom Read
+Read Uncommitted 
+Read Committed(default) X
+Repeatable Read         X				X
+Serializable            X				X					 X
+
+
+
+
+
+

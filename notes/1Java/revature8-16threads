@@ -1,0 +1,74 @@
+
+Asynchronous synchronization
+	each does its own thing, doesnt have to wait for any thread for itself to start
+	eg. gettting data from different sources
+	eg. sending an email while user can continue to do other operations
+	eg. multiple users accessing same data at same time
+
+Threads
+	an entry pt into your application, each with its own flow of control
+	more efficient of the processor, allows for asynchronous execution
+
+	We've already been exposed to the main thread. 
+	Daemon thread: 
+		low priority thread, operating in background
+
+											*JVM lifecycle not tied to life of 
+											daemonthreads
+								JVM			
+						/		    		\
+				start							start
+				   |								|
+				main							garbage collector & any other daemon
+			A 			B
+					   C   D etc
+
+		Garbage Collector: Daemon thread that handles deallocation
+			System.gc() Suggests gc do its thing, but it can not be forced
+			Finalize() method is called by the gc when gc occurs
+
+
+
+
+Creating threads
+	when we create one, we call the method start() on it.
+		start() calls run method, which we will define by overriding
+
+	TWO WAYS
+	1. create a class which extends the Thread class and overrides its run method 
+		when we create an instance of this class, start() calls run()
+									- OR -
+		(2. is preferred)
+	2. create a class ("job" eg) which implements the Runnable interface, a Functional Interface, an interface w/ only one Unimplemented method
+			and in this case, the unimplemented method is run()
+		We create an instance of the class "job". Calling start on our class invokes job's run method
+
+Threads can be in different States
+	NEW: thread instantiated but not run
+	RUNNABLE: currently running
+	BLOCKED: waiting to use a resource because a synchronous thread is using it
+	WAITING: if a thread calls, it will stop until another thread calls notify on it
+	TIMED_WAITING: thread will wait for specified time
+	TERMINATED: thread finished executing OR unusual event occurred
+
+	we make a method synchronized when we only want one thread to access it at a time
+
+Other Methods of threads besides start and run
+	isAlive(): 
+	join(): 	make an operation less asynchronous. Pauses current thread until the thread that called join finishes
+			main	t    main Method 		main	t 		 		main method
+			| 								|					
+			|								---------				t.join
+			|										|	
+			|								---------
+			|								|
+	Deadlock: Two threads are in deadlock 			//FIXME look up more
+	Starvation: a low priority thread keeps getting passed up for a resource cuz 
+				the other thread keeps accessing it
+
+
+
+
+
+
+

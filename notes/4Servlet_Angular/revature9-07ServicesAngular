@@ -1,0 +1,55 @@
+
+Webpack:
+	bundles all our resources into "chunks"
+		which are provided to our index.html
+	can bundle any type of file, but bundles them into js files
+	Starts with main.ts and recursively transverses all imports
+		eg. app.js (is all our application code, everything weve written), vendor.js(bundles 3rdparty resources)
+
+Services using Angular
+	different from component. No template view associated with a 
+		service. 
+
+	any class w a specific purpose
+	good for logic we want to reuse or decouple from our components
+	can be used for any reusable logic but very often is used to 
+		handle http to create a data service decoupled from our 
+		components
+	Dependency Injection:
+		coding practice where we allow a framework to provide an 
+		instance of a dependency, instead of having the dependent class instatiate it on its own. allows injectible services- services any component can use, not just specific to 1 component. Injectibl Services, need the @Injectible metadata so that Angular knows how to create that service dependency whenever a new component would like one injected. 
+
+	In Angular, we implement constructor injection - 
+		eg. providing the dependency as a parameter allows us to work with an instance of that dependency without ever having
+		instantiated it
+	"angular injector" handles the instantiation of our dependencies.
+		These dependencies are our services
+	Services need Declaration
+		@Injectable - decorator which specifies a service (which will
+					be injected into our components). You provide metadata for how to create inside @Injectable decorator fuction
+	Create Service
+		1. crete a class annotated with @Injectable. This imports
+			Injectable from @angular/core
+		2. register our service with our module (belongs in our
+			Providers array)
+		3. then we can provide it to a component via dependency injection as a parameter of any component wed like to use it in
+
+	HttpClient - A service built into Angular. Allows us to handle
+		http calls, abstracts away Ajax process
+	HttpClientModule - provides our http service
+
+		Promises 			Observables-->new to ANgular thru 
+							//3rd party RxJS
+			Both Available in angular to handle asynchronous data
+				Both Cant be cancelled 
+		BUT  				Observ. good for continuous stream
+							process data as it comes (publisher/
+								subscriber)
+							lazy. wont execute less subscribed to
+							
+		Promise a single result, wheter its
+			resolution u want or failure
+		Often used w http cuz were waiting
+			for our response but nothing
+			after that
+		not lazy
